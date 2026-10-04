@@ -1,0 +1,12 @@
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ReimaginingAchievements.csproj.AssemblyReference.cache
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ReimaginingAchievements.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ReimaginingAchievements.AssemblyInfoInputs.cache
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ReimaginingAchievements.AssemblyInfo.cs
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ReimaginingAchievements.csproj.CoreCompileInputs.cache
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\bin\Debug\net8.0\ReimaginingAchievements.deps.json
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\bin\Debug\net8.0\ReimaginingAchievements.dll
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\bin\Debug\net8.0\ReimaginingAchievements.pdb
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ReimaginingAchievements.dll
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\refint\ReimaginingAchievements.dll
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ReimaginingAchievements.pdb
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ref\ReimaginingAchievements.dll

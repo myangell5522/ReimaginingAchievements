@@ -1,0 +1,458 @@
+UI: {
+	All: Все
+	Sources: Источники
+	FilterAll: Все
+	FilterDone: Полученные
+	FilterTodo: Неполученные
+	SortGame: Как в игре
+	SortTodo: Сначала неполученные
+	Progress: "{0}/{1}"
+	More: + {0} ещё
+	Requirements: Требования:
+}
+
+Biomes: {
+	Forest: Лес
+	Space: Космос
+	Snow: Снега
+	Desert: Пустыня
+	Crimson: Багрянец
+	Corruption: Искажение
+	Jungle: Джунгли
+	Dungeon: Темница
+	Ocean: Океан
+	GlowingMushroom: Светящиеся грибы
+	Hallow: Освящение
+	Underworld: Преисподняя
+	Marble: Мраморная пещера
+	Granite: Гранитная пещера
+	Temple: Храм джунглей
+	Aether: Эфир
+	Graveyard: Кладбище
+}
+
+Status: {
+	Debuffs: Дебаффы: {0}/{1}
+	Defense: Защита: {0}/{1}
+	Speed: Скорость: {0}/{1} миль/с
+	Lava: В лаве: {0}/{1} с
+	Traps: Урон ловушками: {0}/{1}
+	Bounces: Прыжки: {0}/{1}
+	FloorAir: Попытка идёт. Не касайтесь опоры.
+	FloorFailed: Попытка сорвана. Было касание.
+	Tax: Налог: {0}/{1} золотых
+	Nurse: Визиты к медсестре: {0}/{1}
+	Platinum: Подобрано монет: {0}/{1} платины
+	Dynamite: Куплено динамита: {0}/{1}
+	Ride: Биомы: {0}/{1}
+	Buffs: Баффы: {0}/{1}
+	Evil: Блоки: {0}/{1}
+	Melody: Сидит: {0}/{1} с
+}
+
+Conditions.Leaf: Кристальный лист
+
+Live: {
+	HiddenName: ??????
+	MartyrName: Martyr
+	MartyrHidden: Докажи, на что ты способен.
+	MartyrTest: Пройди последнее испытание.
+	MartyrDone: Ты прошёл испытание.
+}
+
+Achievements: {
+	AchievementCopperMoonLord: {
+		FriendlyName: Зубочистка
+		Description: Одолейте Лунного лорда, держа медный клинок в руках на протяжении всей битвы и не используя миньонов и стражей.
+	}
+
+	AchievementEoCBiome: {
+		FriendlyName: Великое зрелище
+		Description: Приведите Глаз Ктулху в каждый биом поверхности за одну ночь (лес, океан, снега, пустыня, джунгли, кладбище, лес светящихся грибов, искажение, багрянец и освящение).
+	}
+
+	AchievementBeeStatue: {
+		FriendlyName: Статуевод
+		Description: Одолеть Королеву пчёл, чтобы последний удар по ней был нанесён призванным статуей врагом.
+	}
+
+	AchievementLunaticOrange: {
+		FriendlyName: Лёгкая добыча
+		Description: Одолейте Культиста-лунатика, используя только предметы и экипировку не выше оранжевой редкости. Использование предметов более высокой редкости перед призывом босса не засчитает достижение.
+	}
+
+	AchievementGoldCritter: {
+		FriendlyName: Сверкающие твари
+		Description: Получите каждое золотое животное.
+	}
+
+	AchievementLivingWall: {
+		FriendlyName: Живая стена
+		Description: Повысьте показатель защиты до 200 ед. (190 ед. в классическом режиме).
+	}
+
+	AchievementEoCShuriken: {
+		FriendlyName: Старая школа
+		Description: Одолейте Глаз Ктулху, используя только сюрикены, экипировку не выше синей редкости и не пользуясь ездовыми питомцами.
+	}
+
+	AchievementSpeed: {
+		FriendlyName: Быстрее света
+		Description: Достичь горизонтальной скорости в 250 миль/с (403 км/с или 187,5 тайлов/с)
+	}
+
+	AchievementDutchman: {
+		FriendlyName: Раз, два, пли!
+		Description: Одолейте «Летучего голландца», используя только пушечные ядра.
+	}
+
+	AchievementDwarfFortress: {
+		FriendlyName: Крепость дварфов
+		Description: Одолейте армию гоблинов, используя только ловушки.
+	}
+
+	AchievementHighFive: {
+		FriendlyName: Дай пять!
+		Description: Атакуйте руку Скелетрона с помощью «Рукошлёпа».
+	}
+
+	AchievementTeamWolf: {
+		FriendlyName: Волков боятся
+		Description: Убейте вампира в ближнем бою, находясь в волчьей форме от ожерелья Лилит.
+	}
+
+	AchievementGolemTraps: {
+		FriendlyName: Его же оружием
+		Description: Одолейте Голема, нанеся ему не менее 5 000 ед. урона ловушками.
+	}
+
+	AchievementSpaTrip: {
+		FriendlyName: Банька-парилка
+		Description: Проведите как минимум 3 минуты в лаве, не используя ничего, дающее полную невосприимчивость к лаве.
+	}
+
+	AchievementSlimeMount: {
+		FriendlyName: Вернуть престол
+		Description: Подпрыгните на Королеве слизней с помощью липкого седла более 50 раз за один бой.
+	}
+
+	AchievementThisIsFine: {
+		FriendlyName: This is Fine
+		Description: Сесть на стул и выпить чашку чая, находясь под действием дебаффа «{$BuffName.OnFire}», и «{$BuffName.Frostburn}» или «{$BuffName.CursedInferno}».
+	}
+
+	AchievementOverkill: {
+		FriendlyName: Абсолютная аннигиляция
+		Description: Уничтожьте синего слизня, нанеся ему 3 000 ед. однократного урона с помощью снайперской винтовки (2 000 в классическом режиме).
+	}
+
+	AchievementDebuffs: {
+		FriendlyName: Как мы до этого докатились?
+		Description: Попадите под влияние 15 ванильных дебаффов одновременно (за исключением связанных с голодом или имеющих синюю иконку), не используя красное зелье.
+	}
+
+	AchievementCutDown: {
+		FriendlyName: Срезать углы
+		Description: Одолейте любого механического босса в истинном ближнем бою, используя экипировку не выше лиловой редкости.
+	}
+
+	AchievementBiomes: {
+		FriendlyName: Турист
+		Description: Посетить все следующие биомы менее чем за 15 секунд: лес, космос, снега, пустыня, багрянец, искажение, джунгли, Темница, океан, биом светящихся грибов, освящение, преисподняя, мраморная и гранитная пещеры, храм джунглей и Эфир.
+	}
+
+	FloorIsLava: {
+		FriendlyName: Пол — это лава
+		Description: Одолейте Лунного Лорда, не касаясь твёрдой поверхности, земли, платформ и чего-либо ещё.
+	}
+
+	RememberItsBest: {
+		FriendlyName: ……and I remember it's best
+		Description: Одолейте Аватара пустоты, древнего из погибшей вселенной.
+	}
+
+	NamelessMartyr: {
+		FriendlyName: Martyr
+		Description: Ты прошёл испытание.
+	}
+
+	UponAStar: {
+		FriendlyName: На звезде
+		Description: Почините телескоп Солин и посмотрите на звёзды вместе с ней.
+	}
+
+	WrathOfTheStars: {
+		FriendlyName: Гнев звёзд
+		Description: Увидьте метеорный дождь во время наблюдения за звёздами.
+	}
+
+	GreatLandlord: {
+		FriendlyName: Великий домовладелец
+		Description: Обустройте лагерь Солин.
+	}
+
+	ToasterPanic: {
+		FriendlyName: Паника тостера
+		Description: Одолейте XG-07 «Марс», усиленное восстановление величайшей машины Дрэйдона.
+	}
+
+	PerfectFlower: {
+		FriendlyName: Идеальный цветок идеального мира
+		Description: Завершите создание ГЕНЕЗИСА.
+	}
+
+	GoodAppleBite: {
+		FriendlyName: Чёрт, а яблоко-то ничего...
+		Description: Съешьте Хорошее яблоко.
+	}
+
+	ParryNameless: {
+		FriendlyName: +PARRY
+		Description: Направьте распылитель пустоты на Безымянного бога.
+	}
+
+	WhatDidYouExpect: {
+		FriendlyName: А ты чего ждал?
+		Description: Позвольте Безымянному уничтожить ваш Жезл раздора. Это случается в мире GetFixedBoi.
+	}
+
+	SincerelyForYou: {
+		FriendlyName: Искренне для тебя
+		Description: Отдохните под деревом.
+	}
+
+	MoneyIsSafe: {
+		FriendlyName: Деньги-то хоть целы?
+		Description: Умрите в течение 2 секунд после возвращения домой. В режиме путешествия не выполняется.
+	}
+
+	OnlyWayIsDown: {
+		FriendlyName: Путь только вниз
+		Description: Упадите из космоса до самого низа мира без крюка, вагонетки и касания земли.
+	}
+
+	MrGrinch: {
+		FriendlyName: Ты гадкий, мистер Гринч
+		Description: Убейте Санта-Клауса.
+	}
+
+	LetMeFinish: {
+		FriendlyName: ДАЙ ДОГОВОРИТЬ!
+		Description: Одолейте Глаз Ктулху до второй фазы, пока глаз ещё не отвалился.
+	}
+
+	ItsHarder: {
+		FriendlyName: Ещё сложнее
+		Description: Одолейте всех трёх механических боссов, не сломав ни одного демонического или багряного алтаря.
+	}
+
+	ItsHardest: {
+		FriendlyName: Сложнее некуда
+		Description: Одолейте Голема без надетых аксессуаров и без активных баффов.
+	}
+
+	WeakAreMighty: {
+		FriendlyName: Слабые сильны
+		Description: Одолейте босса с более чем 10 000 здоровья, нанеся весь урон только медным кинжалом.
+	}
+
+	AintACharity: {
+		FriendlyName: Это вам не благотворительность
+		Description: Дойдите до Стены плоти так, чтобы, кроме Гида, не появлялся ни один другой житель.
+	}
+
+	YouExist: {
+		FriendlyName: Ты существуешь?
+		Description: Впервые призовите босса простого режима уже после перехода в сложный. Мир должен быть увиден ещё до сложного режима.
+	}
+
+	Noooo: {
+		FriendlyName: НЕЕЕТ
+		Description: Дайте добыче босса сгореть в лаве.
+	}
+
+	SufferingStronger: {
+		FriendlyName: Страдание закаляет
+		Description: Полечитесь у Медсестры 10 раз за один день.
+	}
+
+	Scrooge: {
+		FriendlyName: Скрудж бы одобрил
+		Description: Получите у Сборщика налогов 50 золотых.
+	}
+
+	RichGetRicher: {
+		FriendlyName: Богатые богатеют
+		Description: Подберите 5 платины за один игровой день.
+	}
+
+	BulletStorm: {
+		FriendlyName: Свинцовый ливень
+		Description: Выпустите 20 пуль меньше чем за 30 кадров.
+	}
+
+	BoomBoomBoom: {
+		FriendlyName: БУМ БУМ БУМ
+		Description: Купите у Подрывника 500 или больше динамита за один разговор.
+	}
+
+	SupremeCalamitas: {
+		FriendlyName: Верховная ведьма, Каламитас
+		Description: Одолейте Верховную ведьму, Каламитас.
+	}
+
+	DevourerOfGods: {
+		FriendlyName: Пожиратель богов
+		Description: Одолейте Пожирателя богов.
+	}
+
+	YharonDragon: {
+		FriendlyName: Ярон, дракон возрождения
+		Description: Одолейте Ярона, дракона возрождения.
+	}
+
+	ExoMechs: {
+		FriendlyName: Экзо-механизмы
+		Description: Одолейте Экзо-механизмы.
+	}
+
+	TheProphet: {
+		FriendlyName: Пророк
+		Description: Одолейте Пророка.
+	}
+
+	NihilityTwins: {
+		FriendlyName: Близнецы небытия
+		Description: Одолейте Близнецов небытия.
+	}
+
+	TheCruiser: {
+		FriendlyName: Крейсер
+		Description: Одолейте Крейсера.
+	}
+
+	Luminaris: {
+		FriendlyName: Люминарис
+		Description: Одолейте Люминарис.
+	}
+
+	HighwayToHell: {
+		FriendlyName: Шоссе в ад
+		Description: Коснитесь потолка мира и за 90 секунд доберитесь до пола преисподней. Способ передвижения любой.
+	}
+
+	LookAtMe: {
+		FriendlyName: Смотрите на меня!
+		Description: Одновременно наденьте Мясные кастеты и Гнилостный аромат и получите баффы «Битва» и «Водяная свеча».
+	}
+
+	RideOfALifetime: {
+		FriendlyName: Поездка длиною в жизнь
+		Description: В одной поездке на вагонетке, не останавливаясь и не сходя с рельсов, посетите биомы «Туриста». Биома, которого нет в мире, не требуется.
+	}
+
+	SixFeetAboveground: {
+		FriendlyName: Шесть футов над землёй
+		Description: Враг преисподней, появившийся в аду, позже оказывается в космосе. Призыв сразу в космосе не считается.
+	}
+
+	Been50Years: {
+		FriendlyName: Прошло 50 лет...
+		Description: Доберитесь до алтаря ящеров в мире «Ради достойных».
+	}
+
+	NoFishyBusiness: {
+		FriendlyName: Никаких рыбных делишек
+		Description: Нанесите смертельный удар Герцогу Рыброну или Дреднаутилусу рыбным оружием.
+	}
+
+	SelfDefenseForDummies: {
+		FriendlyName: Самооборона для чайников
+		Description: Житель сам убивает враждебного монстра, а вы по этой цели не били.
+	}
+
+	BorrowedArsenal: {
+		FriendlyName: Чужой арсенал
+		Description: Весь урон по боссу нанесён предметом, который выпадает из другого босса.
+	}
+
+	SheWouldNever: {
+		FriendlyName: Она бы никогда меня не ранила!
+		Description: Призван куб-компаньон, вокруг темно, и удар приходит со спины.
+	}
+
+	OhhExtraShiny: {
+		FriendlyName: Ооо, ещё блестящее!
+		Description: Подберите семь больших самоцветов и Магилюминесценцию и хотя бы раз получите кристальный лист от полного комплекта хлорофитовой брони.
+	}
+
+	Relocation: {
+		FriendlyName: Переезд
+		Description: Призовите Герцога Рыброна в одном океане, а смертельный удар нанесите в другом.
+	}
+
+	CartoonVillain: {
+		FriendlyName: Мультяшный злодей
+		Description: Убейте враждебного монстра, центр которого вне экрана.
+	}
+
+	FirefistOffice: {
+		FriendlyName: Офис Огненного кулака
+		Description: Пока босс жив, погибают все жители, бывшие в городе в начале боя, и их не меньше трёх. Вы их не били. Затем босс умирает.
+	}
+
+	Unflappable: {
+		FriendlyName: Невозмутимый
+		Description: Иметь сразу 12 баффов без таймера. Питомцы, ездовые и миньоны не считаются.
+	}
+
+	ReRevitalized: {
+		FriendlyName: Снова полон сил
+		Description: 500 здоровья, 200 маны, сердце демона и все постоянные улучшения персонажа.
+	}
+
+	FitsOnTheWall: {
+		FriendlyName: Этому самое место на стене
+		Description: Соберите обычный трофей и реликвию Мастера для боссов прохождения: от Короля слизней до Лунного лорда, а также Королевы слизней, Герцога, Императрицы, Оленя и Бетси.
+	}
+
+	RgbNoHitter: {
+		FriendlyName: RGB без попаданий
+		Description: Проведите минуту рядом с дневной Императрицей света без выстрелов и миньонов, затем победите её.
+	}
+
+	VeryBadTime: {
+		FriendlyName: Очень плохое время
+		Description: Добить любого босса, пока Хранитель темницы жив и преследует вас.
+	}
+
+	Bowling: {
+		FriendlyName: Боулинг
+		Description: Один и тот же валун убивает 5 врагов.
+	}
+
+	WrongKindOfEvil: {
+		FriendlyName: Не то зло
+		Description: Клинамизатором превратите не меньше 200 блоков багрянца фиолетовым раствором или порчи красным за одну обработку.
+	}
+
+	LovelyMelody: {
+		FriendlyName: Прекрасная мелодия
+		Description: 5 минут сидите на стуле или лежите в кровати у играющей музыкальной шкатулки, не атакуя и не вставая.
+	}
+
+	CantStarve: {
+		FriendlyName: Не могу голодать и не буду
+		Description: Весь урон по Оленю нанесён только предметами набора Don't Starve.
+	}
+
+	Scrooged: {
+		FriendlyName: Скрудж!
+		Description: Заселите Санта-Клауса и Сборщика налогов в снежном биоме не дальше 30 блоков друг от друга.
+	}
+
+	ItTakesAVillage: {
+		FriendlyName: Нужна целая деревня
+		Description: Босс умирает, а урон по нему нанесли только жители.
+	}
+}
