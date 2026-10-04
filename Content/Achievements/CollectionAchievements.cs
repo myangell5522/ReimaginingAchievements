@@ -79,10 +79,10 @@ public static class VanillaCatalog
 
 	private static int WeaponKind(Item item)
 	{
-		if (item.damage <= 0 || item.accessory || item.ammo > 0 || item.consumable || item.useStyle == ItemUseStyleID.None)
+		if (item.damage <= 0 || item.accessory || item.ammo != AmmoID.None || item.consumable || item.useStyle == ItemUseStyleID.None)
 			return 0;
 
-		if (item.pick > 0 || item.axe > 0 || item.hammer > 0 || item.fishingPole > 0 || item.createTile >= 0 || item.createWall >= 0)
+		if (item.pick > 0 || item.axe > 0 || item.hammer > 0 || item.fishingPole > 0 || item.createTile != -1 || item.createWall != -1)
 			return 0;
 
 		if (item.CountsAsClass(DamageClass.Summon) || item.CountsAsClass(DamageClass.SummonMeleeSpeed))
