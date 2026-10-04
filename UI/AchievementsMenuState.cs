@@ -19,7 +19,7 @@ using Terraria.UI.Gamepad;
 
 namespace ReimaginingAchievements.UI;
 
-public class AchievementsMenuState : UIState
+public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 {
 	private enum CompletionFilter
 	{
@@ -54,6 +54,8 @@ public class AchievementsMenuState : UIState
 
 	public Achievement GotoTarget { get; set; }
 
+	public UIState PreviousUIState { get; set; }
+
 	public override void OnActivate()
 	{
 		Main.clrInput();
@@ -75,9 +77,12 @@ public class AchievementsMenuState : UIState
 	public override void Update(GameTime gameTime)
 	{
 		base.Update(gameTime);
-		if (!Main.inputTextEscape || Main.gameMenu)
-			return;
+		if (Main.inputTextEscape && !Main.gameMenu)
+			HandleBackButtonUsage();
+	}
 
+	public void HandleBackButtonUsage()
+	{
 		if (_blockInput != null && HasChild(_blockInput))
 		{
 			CloseConfirm(null, null);

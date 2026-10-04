@@ -38,6 +38,9 @@ public class ChallengeGlobalNPC : GlobalNPC
 
 	public static ChallengeGlobalNPC Find(int type)
 	{
+		if (Main.gameMenu)
+			return null;
+
 		for (int i = 0; i < Main.maxNPCs; i++)
 		{
 			NPC npc = Main.npc[i];

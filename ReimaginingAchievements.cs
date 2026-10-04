@@ -1,8 +1,8 @@
 using System.IO;
 using ReimaginingAchievements.Content.Tracking;
 using ReimaginingAchievements.UI;
-using Terraria;
 using Terraria.Achievements;
+using Terraria.GameContent.UI.States;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -14,8 +14,8 @@ public class ReimaginingAchievements : Mod
 
 	public override void Load()
 	{
-		On_IngameFancyUI.OpenAchievements += OpenAchievements;
 		On_IngameFancyUI.OpenAchievementsAndGoto += OpenAchievementsAndGoto;
+		On_UserInterface.SetState += SetState;
 	}
 
 	public override void Unload()
@@ -29,18 +29,19 @@ public class ReimaginingAchievements : Mod
 		Award.Handle(reader);
 	}
 
-	private static void OpenAchievements(On_IngameFancyUI.orig_OpenAchievements orig)
-	{
-		orig();
-		var state = new AchievementsMenuState();
-		state.GotoTarget = _pendingGoto;
-		Main.InGameUI.SetState(state);
-	}
-
+	// orig would call GotoAchievement on the vanilla menu, which is never activated anymore.
 	private static void OpenAchievementsAndGoto(On_IngameFancyUI.orig_OpenAchievementsAndGoto orig, Achievement achievement)
 	{
 		_pendingGoto = achievement;
-		orig(achievement);
+		IngameFancyUI.OpenAchievements();
 		_pendingGoto = null;
+	}
+
+	private static void SetState(On_UserInterface.orig_SetState orig, UserInterface self, UIState state)
+	{
+		if (state is UIAchievementsMenu vanilla)
+			state = new AchievementsMenuState { GotoTarget = _pendingGoto, PreviousUIState = vanilla.PreviousUIState };
+
+		orig(self, state);
 	}
 }
