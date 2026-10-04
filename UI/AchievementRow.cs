@@ -43,6 +43,7 @@ public class AchievementRow : UIPanel
 	private bool _expanded;
 	private int _lockTooltip;
 	private int _lockShake;
+	private int _refresh;
 
 	public Achievement Achievement => _achievement;
 
@@ -129,7 +130,7 @@ public class AchievementRow : UIPanel
 		if (_lockShake > 0)
 			_lockShake--;
 
-		if (!_expanded)
+		if (!_expanded || ++_refresh % 30 != 0)
 			return;
 
 		List<RequirementLine> fresh = RequirementLines.Build(_achievement);
