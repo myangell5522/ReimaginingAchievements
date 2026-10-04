@@ -262,14 +262,18 @@ public class AchievementRow : UIPanel
 		}
 
 		Vector2 nameText = namePos + new Vector2(category >= 0 && category < 4 ? 24f : 6f, 2f);
-		ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, name, nameText, titleColor, 0f, Vector2.Zero, nameScale, textWidth - 28f);
-
+		float right = namePos.X + textWidth - 6f;
 		if (!string.IsNullOrEmpty(source))
 		{
-			Vector2 sourceSize = ChatManager.GetStringSize(FontAssets.ItemStack.Value, source, nameScale, textWidth);
-			Vector2 sourcePos = new Vector2(namePos.X + textWidth - sourceSize.X - 4f, nameText.Y);
-			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, source, sourcePos, new Color(255, 220, 70), 0f, Vector2.Zero, nameScale, textWidth);
+			Vector2 sourceSize = ChatManager.GetStringSize(FontAssets.ItemStack.Value, source, nameScale);
+			right -= sourceSize.X;
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, source, new Vector2(right, nameText.Y), new Color(255, 220, 70), 0f, Vector2.Zero, nameScale);
+			right -= 12f;
 		}
+
+		right = DrawTracker(spriteBatch, right, nameText.Y, titleColor);
+		name = Fit(name, Math.Max(40f, right - nameText.X - 8f), nameScale.X);
+		ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, name, nameText, titleColor, 0f, Vector2.Zero, nameScale);
 
 		string wrapped = FontAssets.ItemStack.Value.CreateWrappedText(description, (textWidth - 16f) * (1f / bodyScale.X), Language.ActiveCulture.CultureInfo);
 		Vector2 bodySize = ChatManager.GetStringSize(FontAssets.ItemStack.Value, wrapped, bodyScale, textWidth);
@@ -280,7 +284,6 @@ public class AchievementRow : UIPanel
 		Vector2 bodyPos = new Vector2(textX, inner.Y + 34f);
 		DrawPanelBottom(spriteBatch, bodyPos, textWidth, chrome);
 		ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, wrapped, bodyPos + new Vector2(8f, 4f), bodyColor, 0f, Vector2.Zero, bodyScale, textWidth - 12f);
-		DrawTracker(spriteBatch, namePos, textWidth, titleColor);
 
 		if (!_expanded)
 			return;
@@ -306,10 +309,10 @@ public class AchievementRow : UIPanel
 		}
 	}
 
-	private void DrawTracker(SpriteBatch spriteBatch, Vector2 namePos, float textWidth, Color titleColor)
+	private float DrawTracker(SpriteBatch spriteBatch, float right, float y, Color titleColor)
 	{
 		if (!_achievement.HasTracker || _achievement.IsCompleted)
-			return;
+			return right;
 
 		IAchievementTracker tracker = _achievement.GetTracker();
 		float value = 0f;
@@ -317,7 +320,7 @@ public class AchievementRow : UIPanel
 		PropertyInfo valueProperty = tracker.GetType().GetProperty("Value");
 		PropertyInfo maxProperty = tracker.GetType().GetProperty("MaxValue");
 		if (valueProperty == null || maxProperty == null)
-			return;
+			return right;
 
 		object rawValue = valueProperty.GetValue(tracker);
 		object rawMax = maxProperty.GetValue(tracker);
@@ -333,17 +336,31 @@ public class AchievementRow : UIPanel
 		}
 
 		if (max <= 0f)
-			return;
+			return right;
 
 		string label = (int)value + "/" + (int)max;
 		float progress = MathHelper.Clamp(value / max, 0f, 1f);
 		Texture2D pixel = TextureAssets.MagicPixel.Value;
-		var bar = new Rectangle((int)(namePos.X + textWidth - 92f), (int)namePos.Y + 18, 84, 8);
+		var bar = new Rectangle((int)(right - 60f), (int)y + 6, 60, 6);
 		spriteBatch.Draw(pixel, bar, new Color(16, 18, 32));
 		spriteBatch.Draw(pixel, new Rectangle(bar.X, bar.Y, (int)(bar.Width * progress), bar.Height), new Color(255, 214, 70));
-		var labelScale = new Vector2(0.7f);
+		var labelScale = new Vector2(0.75f);
 		Vector2 labelSize = ChatManager.GetStringSize(FontAssets.ItemStack.Value, label, labelScale);
-		ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, label, new Vector2(bar.X - labelSize.X - 4f, bar.Y - 4f), titleColor, 0f, Vector2.Zero, labelScale, 80f);
+		float labelX = bar.X - labelSize.X - 6f;
+		ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, label, new Vector2(labelX, y + 1f), titleColor, 0f, Vector2.Zero, labelScale);
+		return labelX - 10f;
+	}
+
+	private static string Fit(string text, float width, float scale)
+	{
+		var font = FontAssets.ItemStack.Value;
+		if (font.MeasureString(text).X * scale <= width)
+			return text;
+
+		while (text.Length > 1 && font.MeasureString(text + "...").X * scale > width)
+			text = text.Substring(0, text.Length - 1);
+
+		return text.TrimEnd() + "...";
 	}
 
 	private void DrawPanelTop(SpriteBatch spriteBatch, Vector2 position, float width, Color color)

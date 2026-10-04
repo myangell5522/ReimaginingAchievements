@@ -1,3 +1,4 @@
 displayName = REAchievements
 author = myangell
 version = 0.1
+buildIgnore = exporticon\*

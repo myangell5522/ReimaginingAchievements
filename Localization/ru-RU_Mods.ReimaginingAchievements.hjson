@@ -1,11 +1,8 @@
 UI: {
-	All: Все
 	Sources: Источники
 	FilterAll: Все
 	FilterDone: Полученные
 	FilterTodo: Неполученные
-	SortGame: Как в игре
-	SortTodo: Сначала неполученные
 	Progress: "{0}/{1}"
 	More: + {0} ещё
 	Requirements: Требования:

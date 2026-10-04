@@ -28,18 +28,15 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 		Todo
 	}
 
-	private enum SortMode
-	{
-		Game,
-		TodoFirst
-	}
+	private const float RailWidth = 170f;
 
 	private readonly List<UIToggleImage> _categoryButtons = new List<UIToggleImage>();
 	private UIList _list;
 	private UISearchBar _search;
+	private UIPanel _searchPanel;
+	private int _escapeGuard;
 	private string _query = "";
 	private UITextPanel<string> _filterButton;
-	private UITextPanel<string> _sortButton;
 	private UITextPanel<LocalizedText> _backButton;
 	private UITextPanel<LocalizedText> _resetButton;
 	private ProgressHeader _progress;
@@ -49,7 +46,6 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 	private UIImage _blockInput;
 	private UIPanel _confirm;
 	private CompletionFilter _completion = CompletionFilter.All;
-	private SortMode _sort = SortMode.Game;
 	private string _source;
 
 	public Achievement GotoTarget { get; set; }
@@ -76,9 +72,20 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 
 	public override void Update(GameTime gameTime)
 	{
+		bool typing = _search != null && _search.IsWritingText || _escapeGuard > 0;
+		if (_escapeGuard > 0)
+			_escapeGuard--;
+
 		base.Update(gameTime);
-		if (Main.inputTextEscape && !Main.gameMenu)
+		if (Main.inputTextEscape && !Main.gameMenu && !typing)
 			HandleBackButtonUsage();
+	}
+
+	public override void LeftMouseDown(UIMouseEvent evt)
+	{
+		base.LeftMouseDown(evt);
+		if (_search != null && _search.IsWritingText && !_searchPanel.ContainsPoint(evt.MousePosition))
+			_search.ToggleTakingText();
 	}
 
 	public void HandleBackButtonUsage()
@@ -117,13 +124,6 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 		_outer.HAlign = 0.5f;
 		Append(_outer);
 
-		var title = new UITextPanel<LocalizedText>(Language.GetText("UI.Achievements"), 1f, true);
-		title.HAlign = 0.5f;
-		title.Top.Set(-33f, 0f);
-		title.SetPadding(13f);
-		title.BackgroundColor = new Color(73, 94, 171);
-		_outer.Append(title);
-
 		_backButton = new UITextPanel<LocalizedText>(Language.GetText("UI.Back"), 0.7f, true);
 		_backButton.Width.Set(-10f, 0.72f);
 		_backButton.Height.Set(50f, 0f);
@@ -159,80 +159,38 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 
 		BuildRail(panel);
 		BuildContent(panel);
+
+		// Appended after the panel so the panel doesn't draw over its lower half.
+		var title = new UITextPanel<LocalizedText>(Language.GetText("UI.Achievements"), 1f, true);
+		title.HAlign = 0.5f;
+		title.Top.Set(-33f, 0f);
+		title.SetPadding(13f);
+		title.BackgroundColor = new Color(73, 94, 171);
+		_outer.Append(title);
+
 		Refill();
 	}
 
 	private void BuildRail(UIElement panel)
 	{
 		var rail = new UIElement();
-		rail.Width.Set(156f, 0f);
+		rail.Width.Set(RailWidth, 0f);
 		rail.Height.Set(-8f, 1f);
 		rail.Top.Set(4f, 0f);
 		panel.Append(rail);
 
-		var all = new UITextPanel<string>(T("UI.All"), 0.7f);
-		all.Width.Set(0f, 1f);
-		all.Height.Set(30f, 0f);
-		all.OnMouseOver += FadeIn;
-		all.OnMouseOut += FadeOut;
-		all.OnLeftClick += (_, _) =>
-		{
-			SoundEngine.PlaySound(SoundID.MenuTick);
-			foreach (UIToggleImage button in _categoryButtons)
-				button.SetState(true);
-
-			_moddedButton.SetState(false);
-			_source = null;
-			HighlightSources();
-			Refill();
-		};
-		rail.Append(all);
-
-		Asset<Texture2D> categories = Main.Assets.Request<Texture2D>("Images/UI/Achievement_Categories");
-		for (int i = 0; i < 4; i++)
-		{
-			var toggle = new UIToggleImage(categories, 32, 32, new Point(34 * i, 0), new Point(34 * i, 34));
-			toggle.Left.Set(4f, 0f);
-			toggle.Top.Set(36f + i * 36f, 0f);
-			toggle.SetState(true);
-			toggle.OnLeftClick += (_, _) =>
-			{
-				SoundEngine.PlaySound(SoundID.MenuTick);
-				Refill();
-			};
-			_categoryButtons.Add(toggle);
-			rail.Append(toggle);
-		}
-
-		_moddedButton = new UIToggleImage(UICommon.UIAchievementsMenuIconsTexture, 32, 32, new Point(0, 0), new Point(0, 34));
-		_moddedButton.Left.Set(4f, 0f);
-		_moddedButton.Top.Set(180f, 0f);
-		_moddedButton.SetState(false);
-		_moddedButton.OnLeftClick += (_, _) =>
-		{
-			SoundEngine.PlaySound(SoundID.MenuTick);
-			Refill();
-		};
-		rail.Append(_moddedButton);
-
 		var sourcesLabel = new UIText(T("UI.Sources"), 0.8f);
-		sourcesLabel.Top.Set(218f, 0f);
+		sourcesLabel.Top.Set(8f, 0f);
 		sourcesLabel.HAlign = 0.5f;
 		rail.Append(sourcesLabel);
 
 		_sourceList = new UIList();
-		_sourceList.Top.Set(240f, 0f);
-		_sourceList.Width.Set(-16f, 1f);
-		_sourceList.Height.Set(-240f, 1f);
+		_sourceList.Top.Set(32f, 0f);
+		_sourceList.Width.Set(0f, 1f);
+		_sourceList.Height.Set(-32f, 1f);
 		_sourceList.ListPadding = 2f;
+		_sourceList.OverflowHidden = true;
 		rail.Append(_sourceList);
-
-		var sourceScroll = new UIScrollbar();
-		sourceScroll.Top.Set(240f, 0f);
-		sourceScroll.Height.Set(-240f, 1f);
-		sourceScroll.HAlign = 1f;
-		rail.Append(sourceScroll);
-		_sourceList.SetScrollbar(sourceScroll);
 
 		var seen = new HashSet<string>();
 		foreach (Achievement achievement in Main.Achievements.CreateAchievementsList())
@@ -271,29 +229,41 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 	private void BuildContent(UIElement panel)
 	{
 		var content = new UIElement();
-		content.Left.Set(168f, 0f);
-		content.Width.Set(-176f, 1f);
+		content.Left.Set(RailWidth + 12f, 0f);
+		content.Width.Set(-RailWidth - 20f, 1f);
 		content.Height.Set(-8f, 1f);
 		content.Top.Set(4f, 0f);
 		panel.Append(content);
 
-		_sortButton = new UITextPanel<string>(SortLabel(), 0.68f);
-		_sortButton.Width.Set(168f, 0f);
-		_sortButton.Height.Set(32f, 0f);
-		_sortButton.OnMouseOver += FadeIn;
-		_sortButton.OnMouseOut += FadeOut;
-		_sortButton.OnLeftClick += (_, _) =>
+		Asset<Texture2D> categories = Main.Assets.Request<Texture2D>("Images/UI/Achievement_Categories");
+		for (int i = 0; i < 4; i++)
+		{
+			var toggle = new UIToggleImage(categories, 32, 32, new Point(34 * i, 0), new Point(34 * i, 34));
+			toggle.Left.Set(i * 36f, 0f);
+			toggle.SetState(true);
+			toggle.OnLeftClick += (_, _) =>
+			{
+				SoundEngine.PlaySound(SoundID.MenuTick);
+				Refill();
+			};
+			_categoryButtons.Add(toggle);
+			content.Append(toggle);
+		}
+
+		_moddedButton = new UIToggleImage(UICommon.UIAchievementsMenuIconsTexture, 32, 32, new Point(0, 0), new Point(0, 34));
+		_moddedButton.Left.Set(4 * 36f, 0f);
+		_moddedButton.SetState(false);
+		_moddedButton.OnLeftClick += (_, _) =>
 		{
 			SoundEngine.PlaySound(SoundID.MenuTick);
-			_sort = _sort == SortMode.Game ? SortMode.TodoFirst : SortMode.Game;
-			_sortButton.SetText(SortLabel());
 			Refill();
 		};
-		content.Append(_sortButton);
+		content.Append(_moddedButton);
 
 		_filterButton = new UITextPanel<string>(FilterLabel(), 0.68f);
-		_filterButton.Left.Set(174f, 0f);
-		_filterButton.Width.Set(168f, 0f);
+		_filterButton.HAlign = 1f;
+		_filterButton.Left.Set(-206f, 0f);
+		_filterButton.Width.Set(124f, 0f);
 		_filterButton.Height.Set(32f, 0f);
 		_filterButton.OnMouseOver += FadeIn;
 		_filterButton.OnMouseOut += FadeOut;
@@ -311,7 +281,7 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 		};
 		content.Append(_filterButton);
 
-		var searchPanel = new UIPanel
+		var searchPanel = _searchPanel = new UIPanel
 		{
 			Width = { Pixels = 200f },
 			Height = { Pixels = 32f },
@@ -337,6 +307,8 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 			_query = text ?? "";
 			Refill();
 		};
+		_search.OnCanceledTakingInput += () => _escapeGuard = 2;
+		_search.OnEndTakingInput += () => _escapeGuard = 2;
 		searchPanel.Append(_search);
 		var clear = new UIImageButton(Main.Assets.Request<Texture2D>("Images/UI/SearchCancel"))
 		{
@@ -351,6 +323,11 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 			Refill();
 		};
 		searchPanel.Append(clear);
+		searchPanel.OnLeftClick += (_, _) =>
+		{
+			if (!clear.IsMouseHovering)
+				_search.ToggleTakingText();
+		};
 
 		_progress = new ProgressHeader();
 		_progress.Top.Set(38f, 0f);
@@ -360,7 +337,7 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 
 		_list = new UIList();
 		_list.Top.Set(62f, 0f);
-		_list.Width.Set(-22f, 1f);
+		_list.Width.Set(-28f, 1f);
 		_list.Height.Set(-62f, 1f);
 		_list.ListPadding = 5f;
 		content.Append(_list);
@@ -388,17 +365,7 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 			rows.Add(achievement);
 		}
 
-		if (_sort == SortMode.TodoFirst)
-		{
-			rows = rows
-				.OrderBy(achievement => achievement.IsCompleted)
-				.ThenBy(achievement => achievement.Id)
-				.ToList();
-		}
-		else
-		{
-			rows = rows.OrderBy(achievement => achievement.Id).ToList();
-		}
+		rows = rows.OrderBy(achievement => achievement.Id).ToList();
 
 		_list.Clear();
 		foreach (Achievement achievement in rows)
@@ -600,11 +567,6 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 		};
 	}
 
-	private string SortLabel()
-	{
-		return _sort == SortMode.TodoFirst ? T("UI.SortTodo") : T("UI.SortGame");
-	}
-
 	private static string T(string suffix)
 	{
 		return Language.GetTextValue("Mods.ReimaginingAchievements." + suffix);
@@ -620,8 +582,8 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 			CalculatedStyle dimensions = GetDimensions();
 			string text = Language.GetTextValue("Mods.ReimaginingAchievements.UI.Progress", Done, Total);
 			var scale = new Vector2(0.85f);
-			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, text, dimensions.Position(), Color.Gold, 0f, Vector2.Zero, scale, 120f);
-			float labelWidth = 92f;
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, text, dimensions.Position(), Color.Gold, 0f, Vector2.Zero, scale);
+			float labelWidth = ChatManager.GetStringSize(FontAssets.ItemStack.Value, text, scale).X + 10f;
 			var bar = new Rectangle((int)(dimensions.X + labelWidth), (int)dimensions.Y + 3, (int)Math.Max(40f, dimensions.Width - labelWidth), 12);
 			Texture2D pixel = TextureAssets.MagicPixel.Value;
 			spriteBatch.Draw(pixel, bar, new Color(13, 20, 44));

@@ -1,11 +1,8 @@
 UI: {
-	All: All
 	Sources: Sources
 	FilterAll: All
 	FilterDone: Completed
 	FilterTodo: Incomplete
-	SortGame: Game order
-	SortTodo: Incomplete first
 	Progress: "{0}/{1}"
 	More: + {0} more
 	Requirements: Requirements:
