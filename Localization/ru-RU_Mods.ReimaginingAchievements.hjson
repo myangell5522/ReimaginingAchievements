@@ -9,7 +9,7 @@ UI: {
 	Progress: "{0}/{1}"
 	More: + {0} ещё
 	Requirements: Требования:
-	RequiresMod: "Требуется мод: {0}"
+	RequiresMod: Требуется мод: {0}
 }
 
 Biomes: {
@@ -49,20 +49,22 @@ Status: {
 	Buffs: Баффы: {0}/{1}
 	Evil: Блоки: {0}/{1}
 	Melody: Сидит: {0}/{1} с
-	Reforge: "Потрачено на перековку: {0}/{1} золотых"
-	Bombs: "Брошено: {0}/{1}"
-	Shards: "Продано: {0}/{1}"
+	Reforge: Потрачено на перековку: {0}/{1} золотых
+	Bombs: Брошено: {0}/{1}
+	Shards: Продано: {0}/{1}
 }
 
-Conditions.Leaf: Кристальный лист
-Conditions.SEED_drunk: Пьяный мир
-Conditions.SEED_bees: Not the bees
-Conditions.SEED_ftw: For the worthy
-Conditions.SEED_anniversary: Celebrationmk10
-Conditions.SEED_dontstarve: The Constant
-Conditions.SEED_remix: "Don't dig up"
-Conditions.SEED_notraps: No traps
-Conditions.SEED_zenith: Zenith
+Conditions: {
+	Leaf: Кристальный лист
+	SEED_drunk: Пьяный мир
+	SEED_bees: Not the bees
+	SEED_ftw: For the worthy
+	SEED_anniversary: Celebrationmk10
+	SEED_dontstarve: The Constant
+	SEED_remix: Don't dig up
+	SEED_notraps: No traps
+	SEED_zenith: Zenith
+}
 
 Live: {
 	HiddenName: ??????
@@ -519,7 +521,7 @@ Achievements: {
 	}
 
 	Kaboom: {
-		FriendlyName: "Бабах?"
+		FriendlyName: Бабах?
 		Description: Взорвите 10 и больше блоков взрывчатки в одно мгновение.
 	}
 
@@ -774,7 +776,7 @@ Achievements: {
 	}
 
 	JustWhy: {
-		FriendlyName: "Но зачем?"
+		FriendlyName: Но зачем?
 		Description: Продайте Зенит и закройте лавку, не выкупив его.
 	}
 
@@ -799,7 +801,7 @@ Achievements: {
 	}
 
 	WhyNameless: {
-		FriendlyName: "Зачем...?"
+		FriendlyName: Зачем...?
 		Description: Победите Безымянного бога только оружием с префиксом «Сломанный» и без зелий баффов.
 	}
 

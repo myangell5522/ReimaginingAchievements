@@ -9,7 +9,7 @@ UI: {
 	Progress: "{0}/{1}"
 	More: + {0} more
 	Requirements: Requirements:
-	RequiresMod: "Requires the mod: {0}"
+	RequiresMod: Requires the mod: {0}
 }
 
 Biomes: {
@@ -49,20 +49,22 @@ Status: {
 	Buffs: Buffs: {0}/{1}
 	Evil: Tiles: {0}/{1}
 	Melody: Seated: {0}/{1} s
-	Reforge: "Spent on reforging: {0}/{1} gold"
-	Bombs: "Thrown: {0}/{1}"
-	Shards: "Sold: {0}/{1}"
+	Reforge: Spent on reforging: {0}/{1} gold
+	Bombs: Thrown: {0}/{1}
+	Shards: Sold: {0}/{1}
 }
 
-Conditions.Leaf: Crystal Leaf
-Conditions.SEED_drunk: Drunk world
-Conditions.SEED_bees: Not the bees
-Conditions.SEED_ftw: For the worthy
-Conditions.SEED_anniversary: Celebrationmk10
-Conditions.SEED_dontstarve: The Constant
-Conditions.SEED_remix: "Don't dig up"
-Conditions.SEED_notraps: No traps
-Conditions.SEED_zenith: Zenith
+Conditions: {
+	Leaf: Crystal Leaf
+	SEED_drunk: Drunk world
+	SEED_bees: Not the bees
+	SEED_ftw: For the worthy
+	SEED_anniversary: Celebrationmk10
+	SEED_dontstarve: The Constant
+	SEED_remix: Don't dig up
+	SEED_notraps: No traps
+	SEED_zenith: Zenith
+}
 
 Live: {
 	HiddenName: ??????
@@ -324,7 +326,7 @@ Achievements: {
 	}
 
 	ExoMechs: {
-		FriendlyName: "Draedon's Choice"
+		FriendlyName: Draedon's Choice
 		Description: Defeat the Exo Mechs.
 	}
 
@@ -479,7 +481,7 @@ Achievements: {
 	}
 
 	BiggerFish: {
-		FriendlyName: "There's Always a Bigger Fish"
+		FriendlyName: There's Always a Bigger Fish
 		Description: Defeat Duke Fishron while staying in water the whole fight, without the Cute Fishron mount.
 	}
 
@@ -504,7 +506,7 @@ Achievements: {
 	}
 
 	GoodRiddance: {
-		FriendlyName: "And Good Riddance... Wait, What?"
+		FriendlyName: And Good Riddance... Wait, What?
 		Description: Let the Corruption, the Crimson and the Hallow together cover 100% of the world.
 	}
 
@@ -519,7 +521,7 @@ Achievements: {
 	}
 
 	Kaboom: {
-		FriendlyName: "Kaboom?"
+		FriendlyName: Kaboom?
 		Description: Set off 10 or more Explosives in the same instant.
 	}
 
@@ -540,16 +542,16 @@ Achievements: {
 
 	OutOfThinAir: {
 		FriendlyName: Out of Thin Air
-		Description: "Catch a Truffle Worm with a bug net while it's in mid-air."
+		Description: Catch a Truffle Worm with a bug net while it's in mid-air.
 	}
 
 	NoisyBunch: {
 		FriendlyName: Noisy Bunch
-		Description: "Within 2 in-game days, witness a Blood Moon, Goblin Army, Slime Rain, Pirate Invasion, Solar Eclipse, Frost Legion, Pumpkin Moon, Frost Moon, Martian Madness and the Old One's Army."
+		Description: Within 2 in-game days, witness a Blood Moon, Goblin Army, Slime Rain, Pirate Invasion, Solar Eclipse, Frost Legion, Pumpkin Moon, Frost Moon, Martian Madness and the Old One's Army.
 	}
 
 	UnderControl: {
-		FriendlyName: "Everything's Under Control"
+		FriendlyName: Everything's Under Control
 		Description: Live from dawn to the next dawn without dying and without ever having fewer than 3 debuffs.
 	}
 
@@ -560,7 +562,7 @@ Achievements: {
 
 	Traitor: {
 		FriendlyName: TRAITOR!!!
-		Description: "Let a bee that wasn't fired from a weapon (Honey Comb and the like) land the killing blow on the Queen Bee."
+		Description: Let a bee that wasn't fired from a weapon (Honey Comb and the like) land the killing blow on the Queen Bee.
 	}
 
 	Meanie: {
@@ -594,7 +596,7 @@ Achievements: {
 	}
 
 	ThatsEmbarrassing: {
-		FriendlyName: "That's Embarrassing"
+		FriendlyName: That's Embarrassing
 		Description: Die from falling, drowning or lava while carrying, but not wearing, an item that would have saved you.
 	}
 
@@ -604,12 +606,12 @@ Achievements: {
 	}
 
 	LovesInTheAir: {
-		FriendlyName: "Love's in the Air"
+		FriendlyName: Love's in the Air
 		Description: Make the Nurse and the Arms Dealer, or the Mechanic and the Goblin Tinkerer, Lovestruck with Love Potions within 10 seconds of each other.
 	}
 
 	NahIdWin: {
-		FriendlyName: "Nah, I'd Win"
+		FriendlyName: Nah, I'd Win
 		Description: Have 5 different bosses alive at once and defeat them all.
 	}
 
@@ -639,7 +641,7 @@ Achievements: {
 	}
 
 	CantTouchThis: {
-		FriendlyName: "Can't Touch This"
+		FriendlyName: Can't Touch This
 		Description: Dodge 3 attacks in a row during a boss fight.
 	}
 
@@ -704,8 +706,8 @@ Achievements: {
 	}
 
 	IDidntTouchYou: {
-		FriendlyName: "I Didn't Touch You!"
-		Description: "Defeat a boss using only passive damage: thorns, dashes and the like."
+		FriendlyName: I Didn't Touch You!
+		Description: Defeat a boss using only passive damage: thorns, dashes and the like.
 	}
 
 	ThisWare: {
@@ -749,7 +751,7 @@ Achievements: {
 	}
 
 	PharaohsFate: {
-		FriendlyName: "The Pharaoh's Fate"
+		FriendlyName: The Pharaoh's Fate
 		Description: Suffocate in sand while wearing a full set of gold armor.
 	}
 
@@ -774,17 +776,17 @@ Achievements: {
 	}
 
 	JustWhy: {
-		FriendlyName: "Just Why?"
+		FriendlyName: Just Why?
 		Description: Sell the Zenith and close the shop without buying it back.
 	}
 
 	IfThatsWhatYouWant: {
-		FriendlyName: "If That's What You Want..."
+		FriendlyName: If That's What You Want...
 		Description: Wear a full maid outfit together with a fox, dog, bunny or lizard tail.
 	}
 
 	WaitThisIsntRight: {
-		FriendlyName: "Wait, This Isn't Right"
+		FriendlyName: Wait, This Isn't Right
 		Description: Wipe out all glowing mushroom grass or all jungle grass in a world that had it.
 	}
 
@@ -799,7 +801,7 @@ Achievements: {
 	}
 
 	WhyNameless: {
-		FriendlyName: "Why...?"
+		FriendlyName: Why...?
 		Description: Defeat the Nameless Deity using only Broken weapons and no buff potions.
 	}
 
