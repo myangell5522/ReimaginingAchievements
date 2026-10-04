@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -14,6 +14,8 @@ namespace ReimaginingAchievements.UI;
 
 public static class RequirementLines
 {
+	private const int MaxLines = 12;
+
 	private static readonly FieldInfo ConditionsField = typeof(Achievement).GetField("_conditions", BindingFlags.Instance | BindingFlags.NonPublic);
 
 	public static List<RequirementLine> Build(Achievement achievement)
@@ -28,9 +30,33 @@ public static class RequirementLines
 			return new List<RequirementLine> { new RequirementLine(Language.GetTextValue("Mods.ReimaginingAchievements.UI.RequiresMod", gated.RequiredDisplayName), false) };
 
 		if (achievement.ModAchievement is IRequirementList custom)
-			return new List<RequirementLine>(custom.GetRequirements());
+			return Trim(new List<RequirementLine>(custom.GetRequirements()));
 
-		return FromConditions(achievement);
+		return Trim(FromConditions(achievement));
+	}
+
+	private static List<RequirementLine> Trim(List<RequirementLine> lines)
+	{
+		if (lines.Count <= MaxLines)
+			return lines;
+
+		var ordered = new List<RequirementLine>(lines.Count);
+		foreach (RequirementLine line in lines)
+		{
+			if (!line.Complete)
+				ordered.Add(line);
+		}
+
+		foreach (RequirementLine line in lines)
+		{
+			if (line.Complete)
+				ordered.Add(line);
+		}
+
+		var trimmed = ordered.GetRange(0, MaxLines);
+		string more = Language.GetTextValue("Mods.ReimaginingAchievements.UI.MoreLines", lines.Count - MaxLines);
+		trimmed.Add(new RequirementLine(more, false));
+		return trimmed;
 	}
 
 	public static string Describe(Achievement achievement, AchievementCondition condition)
@@ -155,6 +181,14 @@ public static class RequirementLines
 		Match item = Regex.Match(name, @"ITEM_(?:PICKUP|CRAFT)_(\d+)");
 		if (item.Success && int.TryParse(item.Groups[1].Value, out int itemId))
 			return Lang.GetItemNameValue(itemId);
+
+		Match buff = Regex.Match(name, @"^BUFF_(\d+)$");
+		if (buff.Success && int.TryParse(buff.Groups[1].Value, out int buffId))
+			return Lang.GetBuffName(buffId);
+
+		Match boss = Regex.Match(name, @"^BOSS_(\d+)$");
+		if (boss.Success && int.TryParse(boss.Groups[1].Value, out int bossId))
+			return Lang.GetNPCNameValue(bossId);
 
 		Match npc = Regex.Match(name, @"NPC_KILLED_(\d+)");
 		if (npc.Success && int.TryParse(npc.Groups[1].Value, out int npcId))
