@@ -1,4 +1,4 @@
-﻿# Достижения
+# Достижения
 # Имя (English) | Источник | Описание
 
 ## Terraria
@@ -162,7 +162,7 @@ This is Fine (This is Fine) | Verv's Achievements | Сесть на стул и 
 БУМ БУМ БУМ (BOOM BOOM BOOM) | REAchievements | Купите у Подрывника 500 или больше динамита за один разговор.
 
 Шоссе в ад (Highway to Hell) | REAchievements | Коснитесь потолка мира и за 90 секунд доберитесь до пола преисподней. Способ передвижения любой.
-Смотрите на меня! (Look at Me!) | REAchievements | Одновременно наденьте Мясные кастеты и Гнилостный аромат и получите баффы «Битва» и «Водяная свеча».
+Смотрите на меня! (Look at Me!) | REAchievements | Поднимите агрессию врагов к себе до 1700+ при баффах «Битва» и «Водяная свеча».
 Поездка длиною в жизнь (Ride of a Lifetime) | REAchievements | В одной поездке на вагонетке, не останавливаясь и не сходя с рельсов, посетите биомы «Туриста». Биома, которого нет в мире, не требуется.
 Шесть футов над землёй (Six Feet Aboveground) | REAchievements | Враг преисподней, появившийся в аду, позже оказывается в космосе. Призыв сразу в космосе не считается.
 Прошло 50 лет... (It's Been 50 Years...) | REAchievements | Доберитесь до алтаря ящеров в мире «Ради достойных».
@@ -202,15 +202,15 @@ Martyr (Martyr) | Calamity: Wrath of the Gods | Ты прошёл испытан
 
 ## Calamity Mod
 
-Верховная ведьма, Каламитас (Supreme Witch, Calamitas) | Calamity Mod | Одолейте Верховную ведьму, Каламитас.
-Пожиратель богов (The Devourer of Gods) | Calamity Mod | Одолейте Пожирателя богов.
-Ярон, дракон возрождения (Yharon, Dragon of Rebirth) | Calamity Mod | Одолейте Ярона, дракона возрождения.
-Экзо-механизмы (Exo Mechs) | Calamity Mod | Одолейте Экзо-механизмы.
+Ведьмин час (Witching Hour) | Calamity Mod | Одолейте Верховную ведьму, Каламитас.
+Черви тоже умирают (Worms Die Too) | Calamity Mod | Одолейте Пожирателя богов.
+Больше никаких возрождений (No More Rebirth) | Calamity Mod | Одолейте Ярона, дракона возрождения.
+Выбор Дрэйдона (Draedon's Choice) | Calamity Mod | Одолейте Экзо-механизмы.
 
 ## Calamity Entropy
 
-Пророк (The Prophet) | Calamity Entropy | Одолейте Пророка.
-Близнецы небытия (Nihility Twins) | Calamity Entropy | Одолейте Близнецов небытия.
-Крейсер (The Cruiser) | Calamity Entropy | Одолейте Крейсера.
-Люминарис (Luminaris) | Calamity Entropy | Одолейте Люминарис.
+Лжепророк (False Prophet) | Calamity Entropy | Одолейте Пророка.
+Ничто на двоих (Nothing Shared) | Calamity Entropy | Одолейте Близнецов небытия.
+Круиз окончен (End of the Cruise) | Calamity Entropy | Одолейте Крейсера.
+Мотылёк на огонь (Moth to a Flame) | Calamity Entropy | Одолейте Люминарис.
 

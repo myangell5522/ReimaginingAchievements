@@ -9,6 +9,7 @@ UI: {
 	Progress: "{0}/{1}"
 	More: + {0} more
 	Requirements: Requirements:
+	RequiresMod: "Requires the mod: {0}"
 }
 
 Biomes: {
@@ -297,42 +298,42 @@ Achievements: {
 	}
 
 	SupremeCalamitas: {
-		FriendlyName: Supreme Witch, Calamitas
+		FriendlyName: Witching Hour
 		Description: Defeat Supreme Witch, Calamitas.
 	}
 
 	DevourerOfGods: {
-		FriendlyName: The Devourer of Gods
+		FriendlyName: Worms Die Too
 		Description: Defeat the Devourer of Gods.
 	}
 
 	YharonDragon: {
-		FriendlyName: Yharon, Dragon of Rebirth
+		FriendlyName: No More Rebirth
 		Description: Defeat Yharon, Dragon of Rebirth.
 	}
 
 	ExoMechs: {
-		FriendlyName: Exo Mechs
+		FriendlyName: "Draedon's Choice"
 		Description: Defeat the Exo Mechs.
 	}
 
 	TheProphet: {
-		FriendlyName: The Prophet
+		FriendlyName: False Prophet
 		Description: Defeat the Prophet.
 	}
 
 	NihilityTwins: {
-		FriendlyName: Nihility Twins
+		FriendlyName: Nothing Shared
 		Description: Defeat the Nihility Twins.
 	}
 
 	TheCruiser: {
-		FriendlyName: The Cruiser
+		FriendlyName: End of the Cruise
 		Description: Defeat the Cruiser.
 	}
 
 	Luminaris: {
-		FriendlyName: Luminaris
+		FriendlyName: Moth to a Flame
 		Description: Defeat Luminaris.
 	}
 
@@ -343,7 +344,7 @@ Achievements: {
 
 	LookAtMe: {
 		FriendlyName: Look at Me!
-		Description: Equip Flesh Knuckles and Putrid Scent together with the Battle and Water Candle buffs.
+		Description: Reach 1700+ aggro while under the Battle and Water Candle buffs.
 	}
 
 	RideOfALifetime: {

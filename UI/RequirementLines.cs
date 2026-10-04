@@ -24,6 +24,9 @@ public static class RequirementLines
 		if (achievement.Hidden && !achievement.IsCompleted)
 			return new List<RequirementLine> { new RequirementLine("???", false) };
 
+		if (LiveText.IsModLocked(achievement) && achievement.ModAchievement is IModGated gated)
+			return new List<RequirementLine> { new RequirementLine(Language.GetTextValue("Mods.ReimaginingAchievements.UI.RequiresMod", gated.RequiredDisplayName), false) };
+
 		if (achievement.ModAchievement is IRequirementList custom)
 			return new List<RequirementLine>(custom.GetRequirements());
 

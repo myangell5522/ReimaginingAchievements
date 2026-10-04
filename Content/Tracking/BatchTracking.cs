@@ -155,18 +155,7 @@ public class BatchPlayer : ModPlayer
 
 	private void UpdateLook()
 	{
-		bool knuckles = false;
-		bool scent = false;
-		for (int slot = 3; slot <= 9; slot++)
-		{
-			int type = Player.armor[slot].type;
-			if (type == ItemID.FleshKnuckles)
-				knuckles = true;
-			else if (type == ItemID.PutridScent)
-				scent = true;
-		}
-
-		if (knuckles && scent && Player.HasBuff(BuffID.Battle) && Player.HasBuff(BuffID.WaterCandle))
+		if (Player.aggro >= 1700 && Player.HasBuff(BuffID.Battle) && Player.HasBuff(BuffID.WaterCandle))
 			ModContent.GetInstance<LookAtMe>().Grant();
 	}
 
@@ -471,15 +460,11 @@ public class BatchNPC : GlobalNPC
 	public bool TownHit;
 	public bool FishBlow;
 	public int DukeSide;
+	private bool _started;
 
-	public override void OnSpawn(NPC npc, IEntitySource source)
+	private void Start(NPC npc)
 	{
-		SpawnedInHell = false;
-		PlayerHit = false;
-		TownHit = false;
-		FishBlow = false;
-		DukeSide = 0;
-
+		_started = true;
 		if (BatchLogic.IsHellSpawn(npc.type) && BatchLogic.InHell(npc))
 			SpawnedInHell = true;
 
@@ -496,7 +481,13 @@ public class BatchNPC : GlobalNPC
 
 	public override void PostAI(NPC npc)
 	{
-		if (!SpawnedInHell || !BatchLogic.Client() || !BatchLogic.InSpace(npc))
+		if (!BatchLogic.Client())
+			return;
+
+		if (!_started)
+			Start(npc);
+
+		if (!SpawnedInHell || !BatchLogic.InSpace(npc))
 			return;
 
 		SpawnedInHell = false;
@@ -514,7 +505,7 @@ public class BatchNPC : GlobalNPC
 			BatchLogic.NoteOtherHit(target, hit.Damage);
 	}
 
-	public override void OnKill(NPC npc)
+	public void HandleKill(NPC npc)
 	{
 		if (!BatchLogic.Client())
 			return;

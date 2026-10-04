@@ -9,6 +9,13 @@ public interface ILiveText
 	string LiveDescription { get; }
 }
 
+public interface IModGated
+{
+	bool ModMissing { get; }
+
+	string RequiredDisplayName { get; }
+}
+
 public static class LiveText
 {
 	public static string Name(Achievement achievement)
@@ -33,9 +40,17 @@ public static class LiveText
 		if (achievement.Hidden && !achievement.IsCompleted)
 			return "???";
 
+		if (IsModLocked(achievement))
+			return "???";
+
 		if (achievement.ModAchievement is ILiveText live && !string.IsNullOrEmpty(live.LiveDescription))
 			return live.LiveDescription;
 
 		return achievement.Description.Value;
+	}
+
+	public static bool IsModLocked(Achievement achievement)
+	{
+		return achievement?.ModAchievement is IModGated gated && gated.ModMissing && !achievement.IsCompleted;
 	}
 }

@@ -126,7 +126,7 @@ public class JokeWorld : ModSystem
 			return;
 
 		SeenBosses.Add(type);
-		ModContent.GetInstance<YouExist>().Grant();
+		Award.Grant<YouExist>();
 	}
 
 	public static void NoteBossLoot(int itemIndex)
@@ -158,7 +158,7 @@ public class JokeWorld : ModSystem
 				continue;
 
 			BossLoot.Remove(index);
-			ModContent.GetInstance<Noooo>().Grant();
+			Award.Grant<Noooo>();
 		}
 	}
 }

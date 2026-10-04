@@ -10,3 +10,4 @@ C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingA
 C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\refint\ReimaginingAchievements.dll
 C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ReimaginingAchievements.pdb
 C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ref\ReimaginingAchievements.dll
+C:\Users\myangell\Documents\My Games\Terraria\tModLoader\ModSources\ReimaginingAchievements\obj\Debug\net8.0\ReimaginingAchievements.sourcelink.json

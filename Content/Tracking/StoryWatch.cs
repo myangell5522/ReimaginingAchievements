@@ -12,7 +12,7 @@ public class StoryWatch : ModSystem
 
 	public override void PostUpdateEverything()
 	{
-		if (Main.gameMenu)
+		if (Main.gameMenu || Main.dedServ)
 			return;
 
 		if (ModLoader.HasMod("NoxusBoss"))

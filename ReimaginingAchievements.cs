@@ -1,3 +1,5 @@
+using System.IO;
+using ReimaginingAchievements.Content.Tracking;
 using ReimaginingAchievements.UI;
 using Terraria;
 using Terraria.Achievements;
@@ -20,6 +22,11 @@ public class ReimaginingAchievements : Mod
 	{
 		_pendingGoto = null;
 		ProgressToast.Reset();
+	}
+
+	public override void HandlePacket(BinaryReader reader, int whoAmI)
+	{
+		Award.Handle(reader);
 	}
 
 	private static void OpenAchievements(On_IngameFancyUI.orig_OpenAchievements orig)

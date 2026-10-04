@@ -74,7 +74,7 @@ public class JokePlayer : ModPlayer
 
 	public override void PostBuyItem(NPC vendor, Item[] shopInventory, Item item)
 	{
-		if (vendor.type != NPCID.Demolitionist || item.type != ItemID.Dynamite)
+		if (Player.whoAmI != Main.myPlayer || vendor.type != NPCID.Demolitionist || item.type != ItemID.Dynamite)
 			return;
 
 		int stack = item.stack > 0 ? item.stack : 1;
@@ -134,7 +134,8 @@ public class JokePlayer : ModPlayer
 				return;
 			}
 
-			if (Player.ZoneUnderworldHeight)
+			int feet = (int)((Player.position.Y + Player.height) / 16f);
+			if (Player.ZoneUnderworldHeight && feet >= Main.maxTilesY - 80)
 			{
 				_falling = false;
 				ModContent.GetInstance<OnlyWayIsDown>().Grant();

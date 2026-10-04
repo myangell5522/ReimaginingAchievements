@@ -9,7 +9,7 @@ public class FloorIsLavaGlobalNPC : GlobalNPC
 {
 	public static bool Killed;
 
-	public override void OnKill(NPC npc)
+	public static void HandleKill(NPC npc)
 	{
 		if (npc.type == NPCID.MoonLordCore)
 			Killed = true;

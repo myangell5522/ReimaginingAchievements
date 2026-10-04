@@ -50,6 +50,9 @@ public class ChallengeGlobalNPC : GlobalNPC
 
 	public override void AI(NPC npc)
 	{
+		if (Main.dedServ)
+			return;
+
 		if (npc.type == NPCID.MoonLordCore && FlagCopperMoonLord)
 		{
 			for (int i = 0; i < Main.maxProjectiles; i++)
@@ -91,6 +94,9 @@ public class ChallengeGlobalNPC : GlobalNPC
 
 	public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
 	{
+		if (Main.dedServ)
+			return;
+
 		if (npc.type == NPCID.PirateShipCannon && projectile.type != ProjectileID.CannonballFriendly)
 			FailDutchman();
 
@@ -143,10 +149,10 @@ public class ChallengeGlobalNPC : GlobalNPC
 	public override void OnHitNPC(NPC npc, NPC target, NPC.HitInfo hit)
 	{
 		if (npc.life - target.damage <= 0 && target.SpawnedFromStatue && npc.type == NPCID.QueenBee)
-			ModContent.GetInstance<AchievementBeeStatue>().BeeStatueCondition.Complete();
+			Award.Grant<AchievementBeeStatue>();
 	}
 
-	public override void OnKill(NPC npc)
+	public void HandleKill(NPC npc)
 	{
 		if (npc.type == NPCID.MoonLordCore && FlagCopperMoonLord)
 			ModContent.GetInstance<AchievementCopperMoonLord>().CopperMoonLordCondition.Complete();

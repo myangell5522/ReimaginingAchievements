@@ -36,22 +36,25 @@ public class JokeNPC : GlobalNPC
 		target.GetGlobalNPC<JokeNPC>().Spoiled = true;
 	}
 
-	public override void OnKill(NPC npc)
+	public void HandleWorldKill(NPC npc)
 	{
 		if (npc.type == NPCID.SantaClaus)
-			ModContent.GetInstance<MrGrinch>().Grant();
+			Award.Grant<MrGrinch>();
 
 		if (npc.type == NPCID.EyeofCthulhu && !EyePhase2)
-			ModContent.GetInstance<LetMeFinish>().Grant();
+			Award.Grant<LetMeFinish>();
 
 		if (IsMech(npc.type) && !JokeWorld.AltarBroken && MechsDown(npc))
-			ModContent.GetInstance<ItsHarder>().Grant();
-
-		if (npc.type == NPCID.GolemHead && JokeGear.LocalIsBare())
-			ModContent.GetInstance<ItsHardest>().Grant();
+			Award.Grant<ItsHarder>();
 
 		if (npc.type == NPCID.WallofFlesh && !JokeWorld.CharitySpoiled)
-			ModContent.GetInstance<AintACharity>().Grant();
+			Award.Grant<AintACharity>();
+	}
+
+	public void HandleLocalKill(NPC npc)
+	{
+		if (npc.type == NPCID.GolemHead && JokeGear.LocalIsBare())
+			ModContent.GetInstance<ItsHardest>().Grant();
 
 		if (npc.boss && npc.lifeMax > 10000 && CopperHit && !Spoiled)
 			ModContent.GetInstance<WeakAreMighty>().Grant();

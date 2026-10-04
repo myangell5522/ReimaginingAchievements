@@ -7,10 +7,13 @@ using ReLogic.Content;
 using ReimaginingAchievements.Common;
 using Terraria;
 using Terraria.Achievements;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ModLoader.UI;
 using Terraria.UI;
 using Terraria.UI.Chat;
 
@@ -30,8 +33,16 @@ public class AchievementRow : UIPanel
 	private readonly Asset<Texture2D> _panelTop;
 	private readonly Asset<Texture2D> _panelBottom;
 	private readonly Asset<Texture2D> _categories;
+	private const int LockTooltipTime = 180;
+
+	private static Asset<Texture2D> LockTexture => ModContent.Request<Texture2D>("ReimaginingAchievements/UI/Lock");
+
+	private static Asset<Texture2D> LinkTexture => ModContent.Request<Texture2D>("ReimaginingAchievements/UI/ChainLink");
+
 	private List<RequirementLine> _lines = new List<RequirementLine>();
 	private bool _expanded;
+	private int _lockTooltip;
+	private int _lockShake;
 
 	public Achievement Achievement => _achievement;
 
@@ -83,6 +94,14 @@ public class AchievementRow : UIPanel
 	public override void LeftClick(UIMouseEvent evt)
 	{
 		base.LeftClick(evt);
+		if (ModLocked && IconRectangle().Contains(evt.MousePosition.ToPoint()))
+		{
+			_lockTooltip = LockTooltipTime;
+			_lockShake = 20;
+			SoundEngine.PlaySound(SoundID.Unlock);
+			return;
+		}
+
 		_expanded = !_expanded;
 		if (_expanded)
 		{
@@ -103,6 +122,13 @@ public class AchievementRow : UIPanel
 	{
 		base.Update(gameTime);
 		_icon.SetFrame(_achievement.IsCompleted ? _unlockedFrame : _lockedFrame);
+		_icon.Color = ModLocked ? new Color(90, 90, 100) : Color.White;
+		if (_lockTooltip > 0)
+			_lockTooltip--;
+
+		if (_lockShake > 0)
+			_lockShake--;
+
 		if (!_expanded)
 			return;
 
@@ -128,6 +154,71 @@ public class AchievementRow : UIPanel
 		base.MouseOut(evt);
 		BackgroundColor = new Color(26, 40, 89) * 0.8f;
 		BorderColor = new Color(13, 20, 44) * 0.8f;
+	}
+
+	public override void Draw(SpriteBatch spriteBatch)
+	{
+		base.Draw(spriteBatch);
+		if (!ModLocked)
+			return;
+
+		DrawChains(spriteBatch);
+		bool hoverIcon = IconRectangle().Contains(Main.MouseScreen.ToPoint());
+		if ((_lockTooltip > 0 || hoverIcon) && _achievement.ModAchievement is IModGated gated)
+			UICommon.TooltipMouseText(Language.GetTextValue("Mods.ReimaginingAchievements.UI.RequiresMod", gated.RequiredDisplayName));
+	}
+
+	private bool ModLocked => LiveText.IsModLocked(_achievement);
+
+	private Rectangle IconRectangle()
+	{
+		CalculatedStyle dims = _icon.GetDimensions();
+		return new Rectangle((int)dims.X, (int)dims.Y, 64, 64);
+	}
+
+	private void DrawChains(SpriteBatch spriteBatch)
+	{
+		Texture2D link = LinkTexture.Value;
+		Texture2D padlock = LockTexture.Value;
+		Rectangle icon = IconRectangle();
+		float time = (float)Main.timeForVisualEffects / 60f;
+		float shake = _lockShake > 0 ? (float)Math.Sin(_lockShake * 1.3f) * _lockShake * 0.12f : 0f;
+		float sag = 6f + (float)Math.Sin(time * 2f) * 1.5f + shake * 0.5f;
+		bool hoverIcon = icon.Contains(Main.MouseScreen.ToPoint());
+		Color chainColor = hoverIcon ? new Color(200, 200, 210) : new Color(150, 150, 160);
+
+		DrawChain(spriteBatch, link, new Vector2(icon.Left + 2, icon.Top + 6), new Vector2(icon.Right - 2, icon.Bottom - 10), sag, chainColor);
+		DrawChain(spriteBatch, link, new Vector2(icon.Right - 2, icon.Top + 6), new Vector2(icon.Left + 2, icon.Bottom - 10), sag, chainColor);
+
+		float sway = (float)Math.Sin(time * 2f) * 0.08f + shake * 0.06f;
+		Vector2 lockPos = new Vector2(icon.Center.X + shake, icon.Center.Y + 4f);
+		Color lockColor = hoverIcon ? Color.White : new Color(225, 225, 225);
+		spriteBatch.Draw(padlock, lockPos, null, lockColor, sway, new Vector2(padlock.Width / 2f, 2f), 1f, SpriteEffects.None, 0f);
+	}
+
+	private static void DrawChain(SpriteBatch spriteBatch, Texture2D link, Vector2 start, Vector2 end, float sag, Color color)
+	{
+		float length = Vector2.Distance(start, end);
+		int count = Math.Max(2, (int)(length / 6f));
+		Vector2 control = (start + end) / 2f + new Vector2(0f, sag);
+		Rectangle flat = new Rectangle(0, 0, link.Width, link.Height / 2);
+		Rectangle edge = new Rectangle(0, link.Height / 2, link.Width, link.Height / 2);
+		for (int i = 0; i <= count; i++)
+		{
+			float t = i / (float)count;
+			Vector2 point = Bezier(start, control, end, t);
+			Vector2 next = Bezier(start, control, end, Math.Min(1f, t + 0.01f));
+			Vector2 previous = Bezier(start, control, end, Math.Max(0f, t - 0.01f));
+			float rotation = (next - previous).ToRotation();
+			Rectangle frame = i % 2 == 0 ? flat : edge;
+			spriteBatch.Draw(link, point, frame, color, rotation, new Vector2(frame.Width / 2f, frame.Height / 2f), 1f, SpriteEffects.None, 0f);
+		}
+	}
+
+	private static Vector2 Bezier(Vector2 a, Vector2 b, Vector2 c, float t)
+	{
+		float u = 1f - t;
+		return u * u * a + 2f * u * t * b + t * t * c;
 	}
 
 	private void Resize()

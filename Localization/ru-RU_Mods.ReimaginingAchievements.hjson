@@ -9,6 +9,7 @@ UI: {
 	Progress: "{0}/{1}"
 	More: + {0} ещё
 	Requirements: Требования:
+	RequiresMod: "Требуется мод: {0}"
 }
 
 Biomes: {
@@ -297,42 +298,42 @@ Achievements: {
 	}
 
 	SupremeCalamitas: {
-		FriendlyName: Верховная ведьма, Каламитас
+		FriendlyName: Ведьмин час
 		Description: Одолейте Верховную ведьму, Каламитас.
 	}
 
 	DevourerOfGods: {
-		FriendlyName: Пожиратель богов
+		FriendlyName: Черви тоже умирают
 		Description: Одолейте Пожирателя богов.
 	}
 
 	YharonDragon: {
-		FriendlyName: Ярон, дракон возрождения
+		FriendlyName: Больше никаких возрождений
 		Description: Одолейте Ярона, дракона возрождения.
 	}
 
 	ExoMechs: {
-		FriendlyName: Экзо-механизмы
+		FriendlyName: Выбор Дрэйдона
 		Description: Одолейте Экзо-механизмы.
 	}
 
 	TheProphet: {
-		FriendlyName: Пророк
+		FriendlyName: Лжепророк
 		Description: Одолейте Пророка.
 	}
 
 	NihilityTwins: {
-		FriendlyName: Близнецы небытия
+		FriendlyName: Ничто на двоих
 		Description: Одолейте Близнецов небытия.
 	}
 
 	TheCruiser: {
-		FriendlyName: Крейсер
+		FriendlyName: Круиз окончен
 		Description: Одолейте Крейсера.
 	}
 
 	Luminaris: {
-		FriendlyName: Люминарис
+		FriendlyName: Мотылёк на огонь
 		Description: Одолейте Люминарис.
 	}
 
@@ -343,7 +344,7 @@ Achievements: {
 
 	LookAtMe: {
 		FriendlyName: Смотрите на меня!
-		Description: Одновременно наденьте Мясные кастеты и Гнилостный аромат и получите баффы «Битва» и «Водяная свеча».
+		Description: Поднимите агрессию врагов к себе до 1700+ при баффах «Битва» и «Водяная свеча».
 	}
 
 	RideOfALifetime: {
