@@ -49,9 +49,20 @@ Status: {
 	Buffs: Buffs: {0}/{1}
 	Evil: Tiles: {0}/{1}
 	Melody: Seated: {0}/{1} s
+	Reforge: "Spent on reforging: {0}/{1} gold"
+	Bombs: "Thrown: {0}/{1}"
+	Shards: "Sold: {0}/{1}"
 }
 
 Conditions.Leaf: Crystal Leaf
+Conditions.SEED_drunk: Drunk world
+Conditions.SEED_bees: Not the bees
+Conditions.SEED_ftw: For the worthy
+Conditions.SEED_anniversary: Celebrationmk10
+Conditions.SEED_dontstarve: The Constant
+Conditions.SEED_remix: "Don't dig up"
+Conditions.SEED_notraps: No traps
+Conditions.SEED_zenith: Zenith
 
 Live: {
 	HiddenName: ??????
@@ -455,5 +466,370 @@ Achievements: {
 	ItTakesAVillage: {
 		FriendlyName: It Takes a Village
 		Description: A boss dies having taken damage only from town NPCs.
+	}
+
+	PureInsanity: {
+		FriendlyName: Pure Insanity
+		Description: Before Hardmode, purge every last evil block in the world without Clentaminator solutions or holy water.
+	}
+
+	TisButAScratch: {
+		FriendlyName: "'Tis But a Scratch"
+		Description: Take a single hit of 400 or more damage and stay alive for 20 more seconds.
+	}
+
+	BiggerFish: {
+		FriendlyName: "There's Always a Bigger Fish"
+		Description: Defeat Duke Fishron while staying in water the whole fight, without the Cute Fishron mount.
+	}
+
+	ImaFiringMahLazer: {
+		FriendlyName: IMA FIRIN MAH LAZER
+		Description: Defeat the Moon Lord dealing all of your damage with the Last Prism.
+	}
+
+	SlimeSlayer: {
+		FriendlyName: The Slime Slayer
+		Description: Have King Slime and Queen Slime alive at the same time and defeat them both.
+	}
+
+	LikeANinja: {
+		FriendlyName: Like a Ninja
+		Description: Defeat a boss with Shadow Dye on every equipped accessory while standing in front of a wall painted with Shadow Paint.
+	}
+
+	GetMeOuttaHere: {
+		FriendlyName: Get Me Outta Here!
+		Description: Be Webbed, Stoned and Frozen at once while hanging on a grappling hook.
+	}
+
+	GoodRiddance: {
+		FriendlyName: "And Good Riddance... Wait, What?"
+		Description: Let the Corruption, the Crimson and the Hallow together cover 100% of the world.
+	}
+
+	MassacreByCat: {
+		FriendlyName: Massacre by Cat
+		Description: Deal 2500 total damage with a single Meowmere projectile.
+	}
+
+	MichaelBay: {
+		FriendlyName: Directed by Michael Bay
+		Description: Ride a minecart away from Explosives going off behind you and take no damage for 2 seconds.
+	}
+
+	Kaboom: {
+		FriendlyName: "Kaboom?"
+		Description: Set off 10 or more Explosives in the same instant.
+	}
+
+	SteelFashioned: {
+		FriendlyName: Steel Fashioned
+		Description: Defeat a mechanical boss wearing only vanity items in all three armor slots.
+	}
+
+	LotOfRainbows: {
+		FriendlyName: A LOT of Rainbows
+		Description: Kill a Rainbow Slime using only the Rainbow Gun and Rainbow Rod while riding a unicorn on Rainbow Brick and wearing Rainbow Dye.
+	}
+
+	PrettySolidName: {
+		FriendlyName: Pretty SOLID Name
+		Description: Play as a character named Big Boss or Snake while wearing Sunglasses.
+	}
+
+	OutOfThinAir: {
+		FriendlyName: Out of Thin Air
+		Description: "Catch a Truffle Worm with a bug net while it's in mid-air."
+	}
+
+	NoisyBunch: {
+		FriendlyName: Noisy Bunch
+		Description: "Within 2 in-game days, witness a Blood Moon, Goblin Army, Slime Rain, Pirate Invasion, Solar Eclipse, Frost Legion, Pumpkin Moon, Frost Moon, Martian Madness and the Old One's Army."
+	}
+
+	UnderControl: {
+		FriendlyName: "Everything's Under Control"
+		Description: Live from dawn to the next dawn without dying and without ever having fewer than 3 debuffs.
+	}
+
+	AppleADay: {
+		FriendlyName: An Apple a Day
+		Description: Eat food while Poisoned or Venomed.
+	}
+
+	Traitor: {
+		FriendlyName: TRAITOR!!!
+		Description: "Let a bee that wasn't fired from a weapon (Honey Comb and the like) land the killing blow on the Queen Bee."
+	}
+
+	Meanie: {
+		FriendlyName: Meanie
+		Description: Kill the Angler while talking to him.
+	}
+
+	OneUp: {
+		FriendlyName: 1-Up
+		Description: Kill an enemy by landing on it with a slime mount.
+	}
+
+	ComboBreaker: {
+		FriendlyName: C-C-C-Combo Breaker
+		Description: Stomp 15 different enemies on a slime mount without touching the ground.
+	}
+
+	YareYareDaze: {
+		FriendlyName: Yare Yare Daze
+		Description: Defeat a post-Plantera boss with all of your damage dealt by the Stardust Guardian.
+	}
+
+	FinestArt: {
+		FriendlyName: The Finest Art
+		Description: Defeat the Moon Lord using only thrown explosives. Art is an explosion!
+	}
+
+	StopIt: {
+		FriendlyName: Stop It
+		Description: Hit the same enemy with 50 Rotten Eggs.
+	}
+
+	ThatsEmbarrassing: {
+		FriendlyName: "That's Embarrassing"
+		Description: Die from falling, drowning or lava while carrying, but not wearing, an item that would have saved you.
+	}
+
+	TemporaryComa: {
+		FriendlyName: Temporary Coma
+		Description: Sleep in a bed for 3 in-game days without getting up.
+	}
+
+	LovesInTheAir: {
+		FriendlyName: "Love's in the Air"
+		Description: Make the Nurse and the Arms Dealer, or the Mechanic and the Goblin Tinkerer, Lovestruck with Love Potions within 10 seconds of each other.
+	}
+
+	NahIdWin: {
+		FriendlyName: "Nah, I'd Win"
+		Description: Have 5 different bosses alive at once and defeat them all.
+	}
+
+	JungleJam: {
+		FriendlyName: Jungle Jam
+		Description: Fight the Queen Bee, Plantera and Golem at the same time and defeat all three.
+	}
+
+	NyaNyaNya: {
+		FriendlyName: Nya Nya Nya
+		Description: Swing the Meowmere while riding the Meowmere Minecart.
+	}
+
+	Impostor: {
+		FriendlyName: Impostor
+		Description: Use a Pirate Map while wearing the full Sailor outfit.
+	}
+
+	Broke: {
+		FriendlyName: Broke
+		Description: Spend 2 platinum coins on reforging.
+	}
+
+	BrokeAgain: {
+		FriendlyName: Broke AGAIN
+		Description: Spend 10 platinum coins on reforging.
+	}
+
+	CantTouchThis: {
+		FriendlyName: "Can't Touch This"
+		Description: Dodge 3 attacks in a row during a boss fight.
+	}
+
+	OhNoAnyway: {
+		FriendlyName: Oh No!... Anyway
+		Description: Die during a boss fight, respawn and finish off that same boss.
+	}
+
+	Stealth: {
+		FriendlyName: Stealth 100
+		Description: Lower your aggro to -2000 or less.
+	}
+
+	OverlyDramatic: {
+		FriendlyName: Overly Dramatic
+		Description: Get healed by the Nurse while under half health and with 3 or more debuffs.
+	}
+
+	NatureOfAThing: {
+		FriendlyName: The Nature of a Thing
+		Description: Defeat a boss or mini-boss using only Broken weapons.
+	}
+
+	FloridaMan: {
+		FriendlyName: Florida Man
+		Description: Drive a golf cart while Tipsy during a boss fight.
+	}
+
+	Defecator: {
+		FriendlyName: Defecator
+		Description: Sit on a toilet while Exquisitely Stuffed.
+	}
+
+	ExtraCheese: {
+		FriendlyName: Extra Cheese
+		Description: Defeat the Destroyer within 10 seconds of it appearing.
+	}
+
+	Bomberman: {
+		FriendlyName: Bomberman
+		Description: Throw 100 bombs or dynamite.
+	}
+
+	Pacifist: {
+		FriendlyName: Pacifist
+		Description: Defeat a boss dealing all of your damage with minions and sentries.
+	}
+
+	LaManchaland: {
+		FriendlyName: La Manchaland
+		Description: Survive a Hardmode Blood Moon with no armor, accessories or mounts, fighting only with jousting lances.
+	}
+
+	TakingCredit: {
+		FriendlyName: Taking Credit
+		Description: Let a town NPC land the killing blow on a boss.
+	}
+
+	WorldwideSlideshow: {
+		FriendlyName: Worldwide Slideshow
+		Description: Spend 10 seconds shimmering inside solid blocks.
+	}
+
+	IDidntTouchYou: {
+		FriendlyName: "I Didn't Touch You!"
+		Description: "Defeat a boss using only passive damage: thorns, dashes and the like."
+	}
+
+	ThisWare: {
+		FriendlyName: This Ware Is Pretty Bad
+		Description: Defeat a mechanical boss using only weapons crafted from its own soul.
+	}
+
+	SeedCollector: {
+		FriendlyName: Seed Collector
+		Description: Visit a world of every secret seed.
+	}
+
+	AbsoluteChaos: {
+		FriendlyName: Absolute Chaos
+		Description: Defeat the Moon Lord in a Zenith world.
+	}
+
+	TrueStormtrooper: {
+		FriendlyName: True Stormtrooper
+		Description: Spend 400 mana from the Laser Machinegun in one burst without hitting anything.
+	}
+
+	GreatKhan: {
+		FriendlyName: Great Khan
+		Description: Ride a horse from one ocean to the other without armor and without dismounting.
+	}
+
+	MetalGearTemple: {
+		FriendlyName: Metal Gear Temple
+		Description: Stay invisible and unhurt from entering the Jungle Temple until Golem is summoned.
+	}
+
+	NowStrike: {
+		FriendlyName: NOW!
+		Description: Hit an enemy with the Thunder Zapper within 5 seconds of an angry emote.
+	}
+
+	BreakingBad: {
+		FriendlyName: Breaking Bad
+		Description: Sell 9000 Crystal Shards.
+	}
+
+	PharaohsFate: {
+		FriendlyName: "The Pharaoh's Fate"
+		Description: Suffocate in sand while wearing a full set of gold armor.
+	}
+
+	ExtinctionEvent: {
+		FriendlyName: Extinction Event
+		Description: Carry 20 identical enemy banners.
+	}
+
+	AntiAnkh: {
+		FriendlyName: Anti-Ankh
+		Description: Suffer every debuff the Ankh Shield protects against at the same time.
+	}
+
+	NoScope: {
+		FriendlyName: No Scope
+		Description: Defeat a Hardmode boss using only the Sniper Rifle with Musket Balls.
+	}
+
+	RedWedding: {
+		FriendlyName: The Red Wedding
+		Description: Within one day, kill every housed town NPC that lived there at dawn (at least 20).
+	}
+
+	JustWhy: {
+		FriendlyName: "Just Why?"
+		Description: Sell the Zenith and close the shop without buying it back.
+	}
+
+	IfThatsWhatYouWant: {
+		FriendlyName: "If That's What You Want..."
+		Description: Wear a full maid outfit together with a fox, dog, bunny or lizard tail.
+	}
+
+	WaitThisIsntRight: {
+		FriendlyName: "Wait, This Isn't Right"
+		Description: Wipe out all glowing mushroom grass or all jungle grass in a world that had it.
+	}
+
+	TrueChallenge: {
+		FriendlyName: The True Challenge
+		Description: Defeat every progression boss using only the Copper Shortsword.
+	}
+
+	UseMoreGun: {
+		FriendlyName: Use More Gun
+		Description: Win an invasion dealing all of your damage with sentries.
+	}
+
+	WhyNameless: {
+		FriendlyName: "Why...?"
+		Description: Defeat the Nameless Deity using only Broken weapons and no buff potions.
+	}
+
+	Alchemist: {
+		FriendlyName: The Alchemist
+		Description: Feel the effect of every vanilla potion.
+	}
+
+	MeleeMaster: {
+		FriendlyName: Melee Master
+		Description: Pick up every vanilla melee weapon.
+	}
+
+	RangedMaster: {
+		FriendlyName: Ranged Master
+		Description: Pick up every vanilla ranged weapon.
+	}
+
+	MagicMaster: {
+		FriendlyName: Magic Master
+		Description: Pick up every vanilla magic weapon.
+	}
+
+	SummonMaster: {
+		FriendlyName: Summon Master
+		Description: Pick up every vanilla summoning weapon.
+	}
+
+	FullArmory: {
+		FriendlyName: Full Armory
+		Description: Pick up every vanilla armor piece that gives defense.
 	}
 }

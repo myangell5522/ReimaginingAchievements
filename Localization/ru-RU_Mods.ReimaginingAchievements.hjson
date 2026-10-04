@@ -49,9 +49,20 @@ Status: {
 	Buffs: Баффы: {0}/{1}
 	Evil: Блоки: {0}/{1}
 	Melody: Сидит: {0}/{1} с
+	Reforge: "Потрачено на перековку: {0}/{1} золотых"
+	Bombs: "Брошено: {0}/{1}"
+	Shards: "Продано: {0}/{1}"
 }
 
 Conditions.Leaf: Кристальный лист
+Conditions.SEED_drunk: Пьяный мир
+Conditions.SEED_bees: Not the bees
+Conditions.SEED_ftw: For the worthy
+Conditions.SEED_anniversary: Celebrationmk10
+Conditions.SEED_dontstarve: The Constant
+Conditions.SEED_remix: "Don't dig up"
+Conditions.SEED_notraps: No traps
+Conditions.SEED_zenith: Zenith
 
 Live: {
 	HiddenName: ??????
@@ -455,5 +466,370 @@ Achievements: {
 	ItTakesAVillage: {
 		FriendlyName: Нужна целая деревня
 		Description: Босс умирает, а урон по нему нанесли только жители.
+	}
+
+	PureInsanity: {
+		FriendlyName: Чистое безумие
+		Description: До хардмода очистите мир от порчи и багрянца до последнего блока, ни разу не используя растворы клинамизатора и святую воду.
+	}
+
+	TisButAScratch: {
+		FriendlyName: Это всего лишь царапина
+		Description: Получите один удар на 400+ урона и проживите после него ещё 20 секунд.
+	}
+
+	BiggerFish: {
+		FriendlyName: Всегда найдётся рыба побольше
+		Description: Победите Герцога Рыброна, весь бой оставаясь в воде и без ездового Милого Рыброна.
+	}
+
+	ImaFiringMahLazer: {
+		FriendlyName: Я ЗАРЯЖАЮ СВОЙ ЛАЗЕР
+		Description: Победите Лунного лорда, нанося весь урон Последней призмой.
+	}
+
+	SlimeSlayer: {
+		FriendlyName: Слизнеборец
+		Description: Сразитесь с Королём и Королевой слизней одновременно и убейте обоих.
+	}
+
+	LikeANinja: {
+		FriendlyName: Как ниндзя
+		Description: Победите босса, когда все надетые аксессуары окрашены Теневым красителем, а стена за вами покрашена Теневой краской.
+	}
+
+	GetMeOuttaHere: {
+		FriendlyName: Вытащите меня отсюда!
+		Description: Окажитесь одновременно в паутине, окаменевшим и замороженным, вися на крюке.
+	}
+
+	GoodRiddance: {
+		FriendlyName: Отличное избавление... Стоп, что?
+		Description: Пусть порча, багрянец и освящение вместе покроют 100% мира.
+	}
+
+	MassacreByCat: {
+		FriendlyName: Кошачья резня
+		Description: Нанесите в сумме 2500 урона одним снарядом Мяумера.
+	}
+
+	MichaelBay: {
+		FriendlyName: Режиссёр — Майкл Бэй
+		Description: Уезжайте на вагонетке от взрывчатки, сработавшей позади, и не получите урона 2 секунды.
+	}
+
+	Kaboom: {
+		FriendlyName: "Бабах?"
+		Description: Взорвите 10 и больше блоков взрывчатки в одно мгновение.
+	}
+
+	SteelFashioned: {
+		FriendlyName: Сталь в моде
+		Description: Победите механического босса, надев во все три слота брони только декоративные предметы.
+	}
+
+	LotOfRainbows: {
+		FriendlyName: ОЧЕНЬ много радуг
+		Description: Убейте радужного слизня только Радужной пушкой и Радужным жезлом, верхом на единороге, стоя на радужном кирпиче и с радужным красителем.
+	}
+
+	PrettySolidName: {
+		FriendlyName: Очень SOLID-ное имя
+		Description: Играйте персонажем по имени Big Boss или Snake в солнцезащитных очках.
+	}
+
+	OutOfThinAir: {
+		FriendlyName: Из воздуха
+		Description: Поймайте трюфельного червя сачком, пока он в воздухе.
+	}
+
+	NoisyBunch: {
+		FriendlyName: Шумная компания
+		Description: За 2 игровых дня застаньте кровавую луну, армию гоблинов, слизневый дождь, пиратов, затмение, морозный легион, тыквенную и ледяную луны, марсиан и армию Древних.
+	}
+
+	UnderControl: {
+		FriendlyName: Всё под контролем
+		Description: Проживите от рассвета до следующего рассвета, не умерев и ни на миг не имея меньше 3 дебаффов.
+	}
+
+	AppleADay: {
+		FriendlyName: Яблоко в день
+		Description: Съешьте еду под отравлением или ядом.
+	}
+
+	Traitor: {
+		FriendlyName: ПРЕДАТЕЛЬ!!!
+		Description: Пусть Королеву пчёл добьёт пчела, выпущенная не оружием (Медовые соты и подобное).
+	}
+
+	Meanie: {
+		FriendlyName: Злюка
+		Description: Убейте Рыбака, пока разговариваете с ним.
+	}
+
+	OneUp: {
+		FriendlyName: Плюс жизнь
+		Description: Убейте врага, приземлившись на него верхом на слизне.
+	}
+
+	ComboBreaker: {
+		FriendlyName: К-к-к-комбо
+		Description: Верхом на слизне попадите прыжками по 15 разным врагам, не касаясь земли.
+	}
+
+	YareYareDaze: {
+		FriendlyName: Яре-яре дазе
+		Description: Победите пост-плантерного босса, нанеся весь урон Звёздным стражем.
+	}
+
+	FinestArt: {
+		FriendlyName: Высшее искусство
+		Description: Победите Лунного лорда только метательной взрывчаткой. Искусство — это взрыв!
+	}
+
+	StopIt: {
+		FriendlyName: Хватит
+		Description: Попадите в одного и того же врага 50 тухлыми яйцами.
+	}
+
+	ThatsEmbarrassing: {
+		FriendlyName: Как неловко
+		Description: Умрите от падения, утопления или лавы, когда в инвентаре лежит (но не надет) предмет, который бы вас спас.
+	}
+
+	TemporaryComa: {
+		FriendlyName: Временная кома
+		Description: Проспите в кровати 3 игровых дня, не вставая.
+	}
+
+	LovesInTheAir: {
+		FriendlyName: Любовь витает в воздухе
+		Description: Влюбите любовными зельями Медсестру и Торговца оружием или Механика и Гоблина-изобретателя с разницей не больше 10 секунд.
+	}
+
+	NahIdWin: {
+		FriendlyName: Не, я выиграю
+		Description: Пусть одновременно будут живы 5 разных боссов, и убейте их всех.
+	}
+
+	JungleJam: {
+		FriendlyName: Джунглевый джем
+		Description: Сразитесь с Королевой пчёл, Плантерой и Големом одновременно и убейте всех троих.
+	}
+
+	NyaNyaNya: {
+		FriendlyName: Ня ня ня
+		Description: Взмахните Мяумером, катаясь в мяумерной вагонетке.
+	}
+
+	Impostor: {
+		FriendlyName: Самозванец
+		Description: Используйте Пиратскую карту в полном матросском костюме.
+	}
+
+	Broke: {
+		FriendlyName: На мели
+		Description: Потратьте на перековку 2 платиновые монеты.
+	}
+
+	BrokeAgain: {
+		FriendlyName: Снова на мели
+		Description: Потратьте на перековку 10 платиновых монет.
+	}
+
+	CantTouchThis: {
+		FriendlyName: Тебе не достать
+		Description: Увернитесь от 3 атак подряд во время боя с боссом.
+	}
+
+	OhNoAnyway: {
+		FriendlyName: О нет!... Ну ладно
+		Description: Умрите в бою с боссом, возродитесь и добейте того же босса.
+	}
+
+	Stealth: {
+		FriendlyName: Стелс 100
+		Description: Снизьте агрессию врагов к себе до -2000 или ниже.
+	}
+
+	OverlyDramatic: {
+		FriendlyName: Драма
+		Description: Вылечитесь у Медсестры, имея меньше половины здоровья и 3+ дебаффа.
+	}
+
+	NatureOfAThing: {
+		FriendlyName: Природа вещей
+		Description: Победите босса или мини-босса только оружием с префиксом «Сломанный».
+	}
+
+	FloridaMan: {
+		FriendlyName: Флоридский мужик
+		Description: Катайтесь на гольф-каре навеселе во время боя с боссом.
+	}
+
+	Defecator: {
+		FriendlyName: Дефекатор
+		Description: Сядьте на унитаз с баффом «Изысканно сыт».
+	}
+
+	ExtraCheese: {
+		FriendlyName: Двойной сыр
+		Description: Убейте Уничтожителя меньше чем за 10 секунд после его появления.
+	}
+
+	Bomberman: {
+		FriendlyName: Бомбермен
+		Description: Бросьте 100 бомб или динамитов.
+	}
+
+	Pacifist: {
+		FriendlyName: Пацифист
+		Description: Победите босса, нанеся весь урон миньонами и стражами.
+	}
+
+	LaManchaland: {
+		FriendlyName: Ламанчаленд
+		Description: Переживите хардмодную кровавую луну без брони, аксессуаров и ездовых, сражаясь только турнирными копьями.
+	}
+
+	TakingCredit: {
+		FriendlyName: Чужие лавры
+		Description: Пусть босса добьёт житель.
+	}
+
+	WorldwideSlideshow: {
+		FriendlyName: Слайд-шоу
+		Description: Проведите 10 секунд в мерцании внутри блоков.
+	}
+
+	IDidntTouchYou: {
+		FriendlyName: Я тебя не трогал!
+		Description: Победите босса только пассивным уроном: шипами, рывками и подобным.
+	}
+
+	ThisWare: {
+		FriendlyName: Изделие так себе
+		Description: Победите механического босса только оружием, скрафченным из его собственной души.
+	}
+
+	SeedCollector: {
+		FriendlyName: Коллекционер семян
+		Description: Побывайте в мирах всех секретных сидов.
+	}
+
+	AbsoluteChaos: {
+		FriendlyName: Абсолютный хаос
+		Description: Победите Лунного лорда в мире Zenith.
+	}
+
+	TrueStormtrooper: {
+		FriendlyName: Настоящий штурмовик
+		Description: Потратьте 400 маны из Лазерного пулемёта за одну очередь, ни разу не попав.
+	}
+
+	GreatKhan: {
+		FriendlyName: Великий хан
+		Description: Проскачите на лошади от океана до океана без брони, не слезая.
+	}
+
+	MetalGearTemple: {
+		FriendlyName: Метал Гир Храм
+		Description: Оставайтесь невидимым и невредимым с момента входа в храм джунглей до призыва Голема.
+	}
+
+	NowStrike: {
+		FriendlyName: СЕЙЧАС!
+		Description: Попадите по врагу Громовым разрядником в течение 5 секунд после злой эмоции.
+	}
+
+	BreakingBad: {
+		FriendlyName: Во все тяжкие
+		Description: Продайте 9000 кристальных осколков.
+	}
+
+	PharaohsFate: {
+		FriendlyName: Судьба фараона
+		Description: Задохнитесь в песке в полном комплекте золотой брони.
+	}
+
+	ExtinctionEvent: {
+		FriendlyName: Вымирание
+		Description: Соберите в инвентаре 20 одинаковых знамён.
+	}
+
+	AntiAnkh: {
+		FriendlyName: Анти-анх
+		Description: Получите одновременно все дебаффы, от которых защищает Щит анха.
+	}
+
+	NoScope: {
+		FriendlyName: Без прицела
+		Description: Победите хардмодного босса только Снайперской винтовкой с мушкетными пулями.
+	}
+
+	RedWedding: {
+		FriendlyName: Красная свадьба
+		Description: За одни сутки убейте всех жителей, живших в домах на рассвете (не меньше 20).
+	}
+
+	JustWhy: {
+		FriendlyName: "Но зачем?"
+		Description: Продайте Зенит и закройте лавку, не выкупив его.
+	}
+
+	IfThatsWhatYouWant: {
+		FriendlyName: Ну, если тебе так хочется...
+		Description: Наденьте полный костюм горничной и хвост лисы, собаки, кролика или ящерицы.
+	}
+
+	WaitThisIsntRight: {
+		FriendlyName: Стоп, что-то не так
+		Description: Уничтожьте всю грибную траву или всю траву джунглей в мире, где она была.
+	}
+
+	TrueChallenge: {
+		FriendlyName: Настоящее испытание
+		Description: Победите каждого босса прохождения только медным коротким мечом.
+	}
+
+	UseMoreGun: {
+		FriendlyName: Больше пушек
+		Description: Отбейте вторжение, нанося весь урон стражами.
+	}
+
+	WhyNameless: {
+		FriendlyName: "Зачем...?"
+		Description: Победите Безымянное божество только оружием с префиксом «Сломанный» и без зелий баффов.
+	}
+
+	Alchemist: {
+		FriendlyName: Алхимик
+		Description: Испытайте на себе эффект каждого ванильного зелья.
+	}
+
+	MeleeMaster: {
+		FriendlyName: Мастер ближнего боя
+		Description: Подберите всё ванильное оружие ближнего боя.
+	}
+
+	RangedMaster: {
+		FriendlyName: Мастер стрельбы
+		Description: Подберите всё ванильное оружие дальнего боя.
+	}
+
+	MagicMaster: {
+		FriendlyName: Мастер магии
+		Description: Подберите всё ванильное магическое оружие.
+	}
+
+	SummonMaster: {
+		FriendlyName: Мастер призыва
+		Description: Подберите всё ванильное оружие призыва.
+	}
+
+	FullArmory: {
+		FriendlyName: Полный арсенал
+		Description: Подберите каждую ванильную часть брони с защитой.
 	}
 }

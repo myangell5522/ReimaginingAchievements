@@ -54,7 +54,7 @@ public static class RequirementLines
 		}
 
 		var trimmed = ordered.GetRange(0, MaxLines);
-		string more = Language.GetTextValue("Mods.ReimaginingAchievements.UI.MoreLines", lines.Count - MaxLines);
+		string more = Language.GetTextValue("Mods.ReimaginingAchievements.UI.More", lines.Count - MaxLines);
 		trimmed.Add(new RequirementLine(more, false));
 		return trimmed;
 	}
