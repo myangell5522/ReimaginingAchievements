@@ -50,8 +50,7 @@ public class AchievementRow : UIPanel
 	public AchievementRow(Achievement achievement)
 	{
 		_achievement = achievement;
-		BackgroundColor = new Color(26, 40, 89) * 0.8f;
-		BorderColor = new Color(13, 20, 44) * 0.8f;
+		ApplyIdleColors();
 		Width.Set(0f, 1f);
 		PaddingTop = 8f;
 		PaddingLeft = 9f;
@@ -123,7 +122,7 @@ public class AchievementRow : UIPanel
 	{
 		base.Update(gameTime);
 		_icon.SetFrame(_achievement.IsCompleted ? _unlockedFrame : _lockedFrame);
-		_icon.Color = ModLocked ? new Color(90, 90, 100) : Color.White;
+		_icon.Color = ModLocked ? new Color(110, 110, 120) : Color.White;
 		if (_lockTooltip > 0)
 			_lockTooltip--;
 
@@ -146,6 +145,13 @@ public class AchievementRow : UIPanel
 	public override void MouseOver(UIMouseEvent evt)
 	{
 		base.MouseOver(evt);
+		if (ModLocked)
+		{
+			BackgroundColor = new Color(52, 54, 72);
+			BorderColor = new Color(24, 24, 34);
+			return;
+		}
+
 		BackgroundColor = new Color(46, 60, 119);
 		BorderColor = new Color(20, 30, 56);
 	}
@@ -153,6 +159,19 @@ public class AchievementRow : UIPanel
 	public override void MouseOut(UIMouseEvent evt)
 	{
 		base.MouseOut(evt);
+		ApplyIdleColors();
+	}
+
+	private void ApplyIdleColors()
+	{
+		if (ModLocked)
+		{
+			// A cold, desaturated panel reads as "sealed" next to the blue rows.
+			BackgroundColor = new Color(34, 36, 50) * 0.85f;
+			BorderColor = new Color(14, 14, 22) * 0.85f;
+			return;
+		}
+
 		BackgroundColor = new Color(26, 40, 89) * 0.8f;
 		BorderColor = new Color(13, 20, 44) * 0.8f;
 	}
@@ -184,35 +203,68 @@ public class AchievementRow : UIPanel
 		Rectangle icon = IconRectangle();
 		float time = (float)Main.timeForVisualEffects / 60f;
 		float shake = _lockShake > 0 ? (float)Math.Sin(_lockShake * 1.3f) * _lockShake * 0.12f : 0f;
-		float sag = 6f + (float)Math.Sin(time * 2f) * 1.5f + shake * 0.5f;
 		bool hoverIcon = icon.Contains(Main.MouseScreen.ToPoint());
-		Color chainColor = hoverIcon ? new Color(200, 200, 210) : new Color(150, 150, 160);
 
-		DrawChain(spriteBatch, link, new Vector2(icon.Left + 2, icon.Top + 6), new Vector2(icon.Right - 2, icon.Bottom - 10), sag, chainColor);
-		DrawChain(spriteBatch, link, new Vector2(icon.Right - 2, icon.Top + 6), new Vector2(icon.Left + 2, icon.Bottom - 10), sag, chainColor);
+		// Darken the art under the chains so the chains and lock read clearly.
+		spriteBatch.Draw(TextureAssets.MagicPixel.Value, icon, Color.Black * 0.35f);
 
-		float sway = (float)Math.Sin(time * 2f) * 0.08f + shake * 0.06f;
-		Vector2 lockPos = new Vector2(icon.Center.X + shake, icon.Center.Y + 4f);
-		Color lockColor = hoverIcon ? Color.White : new Color(225, 225, 225);
-		spriteBatch.Draw(padlock, lockPos, null, lockColor, sway, new Vector2(padlock.Width / 2f, 2f), 1f, SpriteEffects.None, 0f);
+		float sag = 5f + (float)Math.Sin(time * 1.6f) * 1.2f + shake * 0.5f;
+		Color chain = hoverIcon ? new Color(214, 214, 226) : new Color(168, 168, 182);
+		Vector2 topLeft = new Vector2(icon.Left - 3, icon.Top + 3);
+		Vector2 topRight = new Vector2(icon.Right + 3, icon.Top + 3);
+		Vector2 bottomLeft = new Vector2(icon.Left - 3, icon.Bottom - 5);
+		Vector2 bottomRight = new Vector2(icon.Right + 3, icon.Bottom - 5);
+
+		DrawChain(spriteBatch, link, topLeft, bottomRight, sag, chain);
+		DrawChain(spriteBatch, link, topRight, bottomLeft, sag, chain);
+		DrawRivet(spriteBatch, topLeft);
+		DrawRivet(spriteBatch, topRight);
+		DrawRivet(spriteBatch, bottomLeft);
+		DrawRivet(spriteBatch, bottomRight);
+
+		float sway = (float)Math.Sin(time * 1.6f) * 0.07f + shake * 0.06f;
+		Vector2 lockPos = new Vector2(icon.Center.X + shake, icon.Center.Y - 2f + sag * 0.5f);
+		Vector2 origin = new Vector2(padlock.Width / 2f, 3f);
+		spriteBatch.Draw(padlock, lockPos + new Vector2(2f, 2f), null, Color.Black * 0.45f, sway, origin, 1f, SpriteEffects.None, 0f);
+		spriteBatch.Draw(padlock, lockPos, null, hoverIcon ? Color.White : new Color(232, 232, 232), sway, origin, 1f, SpriteEffects.None, 0f);
+	}
+
+	private static void DrawRivet(SpriteBatch spriteBatch, Vector2 at)
+	{
+		Texture2D pixel = TextureAssets.MagicPixel.Value;
+		var point = at.ToPoint();
+		spriteBatch.Draw(pixel, new Rectangle(point.X - 3, point.Y - 3, 6, 6), new Color(20, 20, 28));
+		spriteBatch.Draw(pixel, new Rectangle(point.X - 2, point.Y - 2, 4, 4), new Color(120, 120, 134));
+		spriteBatch.Draw(pixel, new Rectangle(point.X - 2, point.Y - 2, 2, 2), new Color(196, 196, 210));
 	}
 
 	private static void DrawChain(SpriteBatch spriteBatch, Texture2D link, Vector2 start, Vector2 end, float sag, Color color)
 	{
-		float length = Vector2.Distance(start, end);
-		int count = Math.Max(2, (int)(length / 6f));
+		// ChainLink.png holds two 10x6 frames: a ring seen face-on and a ring seen edge-on.
+		int frameHeight = link.Height / 2;
+		Rectangle face = new Rectangle(0, 0, link.Width, frameHeight);
+		Rectangle edge = new Rectangle(0, frameHeight, link.Width, frameHeight);
 		Vector2 control = (start + end) / 2f + new Vector2(0f, sag);
-		Rectangle flat = new Rectangle(0, 0, link.Width, link.Height / 2);
-		Rectangle edge = new Rectangle(0, link.Height / 2, link.Width, link.Height / 2);
-		for (int i = 0; i <= count; i++)
+		float length = Vector2.Distance(start, end);
+		int count = Math.Max(2, (int)(length / (link.Width - 3f)));
+		for (int pass = 0; pass < 2; pass++)
 		{
-			float t = i / (float)count;
-			Vector2 point = Bezier(start, control, end, t);
-			Vector2 next = Bezier(start, control, end, Math.Min(1f, t + 0.01f));
-			Vector2 previous = Bezier(start, control, end, Math.Max(0f, t - 0.01f));
-			float rotation = (next - previous).ToRotation();
-			Rectangle frame = i % 2 == 0 ? flat : edge;
-			spriteBatch.Draw(link, point, frame, color, rotation, new Vector2(frame.Width / 2f, frame.Height / 2f), 1f, SpriteEffects.None, 0f);
+			for (int i = 0; i <= count; i++)
+			{
+				// Edge-on links go underneath, face-on links on top, like real interlocking rings.
+				if (i % 2 != pass)
+					continue;
+
+				float t = i / (float)count;
+				Vector2 point = Bezier(start, control, end, t);
+				Vector2 next = Bezier(start, control, end, Math.Min(1f, t + 0.01f));
+				Vector2 previous = Bezier(start, control, end, Math.Max(0f, t - 0.01f));
+				float rotation = (next - previous).ToRotation();
+				Rectangle frame = i % 2 == 0 ? edge : face;
+				Vector2 origin = new Vector2(frame.Width / 2f, frame.Height / 2f);
+				spriteBatch.Draw(link, point + new Vector2(1f, 2f), frame, Color.Black * 0.35f, rotation, origin, 1f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(link, point, frame, color, rotation, origin, 1f, SpriteEffects.None, 0f);
+			}
 		}
 	}
 
@@ -245,9 +297,10 @@ public class AchievementRow : UIPanel
 		CalculatedStyle inner = GetInnerDimensions();
 		float textX = inner.X + 84f;
 		float textWidth = inner.Width - 96f;
-		Color titleColor = locked ? Color.Silver : Color.Gold;
+		bool sealedRow = ModLocked;
+		Color titleColor = sealedRow ? new Color(150, 152, 168) : locked ? Color.Silver : Color.Gold;
 		titleColor = Color.Lerp(titleColor, Color.White, IsMouseHovering ? 0.5f : 0f);
-		Color bodyColor = locked ? Color.DarkGray : Color.Silver;
+		Color bodyColor = sealedRow ? new Color(206, 128, 120) : locked ? Color.DarkGray : Color.Silver;
 		bodyColor = Color.Lerp(bodyColor, Color.White, IsMouseHovering ? 0.35f : 0f);
 		Color chrome = IsMouseHovering ? Color.White : Color.Gray;
 		var nameScale = new Vector2(0.85f);
@@ -267,7 +320,16 @@ public class AchievementRow : UIPanel
 		{
 			Vector2 sourceSize = ChatManager.GetStringSize(FontAssets.ItemStack.Value, source, nameScale);
 			right -= sourceSize.X;
-			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, source, new Vector2(right, nameText.Y), new Color(255, 220, 70), 0f, Vector2.Zero, nameScale);
+			Color sourceColor = sealedRow ? new Color(140, 140, 156) : new Color(255, 220, 70);
+			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, source, new Vector2(right, nameText.Y), sourceColor, 0f, Vector2.Zero, nameScale);
+			if (sealedRow)
+			{
+				// A small padlock in front of the mod name marks the whole source as missing.
+				Texture2D padlock = LockTexture.Value;
+				right -= padlock.Width * 0.6f + 4f;
+				spriteBatch.Draw(padlock, new Vector2(right, nameText.Y - 1f), null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
+			}
+
 			right -= 12f;
 		}
 

@@ -94,17 +94,19 @@ public class BatchPlayer : ModPlayer
 
 	public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
 	{
-		TryBackstab(npc.Center.X);
+		if (Player.whoAmI == Main.myPlayer)
+			TryBackstab(npc.Center.X);
 	}
 
 	public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
 	{
-		TryBackstab(proj.Center.X);
+		if (Player.whoAmI == Main.myPlayer)
+			TryBackstab(proj.Center.X);
 	}
 
 	public override void OnHurt(Player.HurtInfo info)
 	{
-		if (info.Cancelled || info.HitDirection == 0 || info.HitDirection != Player.direction)
+		if (Player.whoAmI != Main.myPlayer || info.Cancelled || info.HitDirection == 0 || info.HitDirection != Player.direction)
 			return;
 
 		TryBackstab(Player.Center.X - info.HitDirection);
@@ -113,23 +115,32 @@ public class BatchPlayer : ModPlayer
 	public static int RequiredBiomes()
 	{
 		if (Main.gameMenu)
-			return 14;
+			return 13;
 
-		int count = 15;
-		if (!NPC.downedPlantBoss)
-			count--;
+		int count = 0;
+		for (int i = 0; i < 16; i++)
+		{
+			if (BiomeRequired(i))
+				count++;
+		}
 
 		return count;
 	}
 
 	public static bool BiomeRequired(int index)
 	{
+		// Only the world's own evil is required (index 4 = Crimson, 5 = Corruption).
 		if (index == 4)
 			return WorldGen.crimson;
 
 		if (index == 5)
 			return !WorldGen.crimson;
 
+		// The Hallow does not exist before Hardmode.
+		if (index == 10)
+			return Main.hardMode;
+
+		// The Jungle Temple door only opens after Plantera.
 		if (index == 14)
 			return NPC.downedPlantBoss;
 
@@ -138,7 +149,8 @@ public class BatchPlayer : ModPlayer
 
 	private void UpdateHighway()
 	{
-		if (Player.position.Y <= 16f * 8f)
+		// Vanilla clamps the player 41 tiles below the top edge (Main.topWorld + 656 px); that is the "ceiling".
+		if (Player.position.Y <= Main.topWorld + 640f + 16f + 2f)
 		{
 			_highway = HighwayTime;
 			return;
@@ -294,7 +306,10 @@ public class BatchPlayer : ModPlayer
 			&& Player.usedArcaneCrystal
 			&& Player.usedGalaxyPearl
 			&& Player.usedGummyWorm
-			&& Player.usedAmbrosia)
+			&& Player.usedAmbrosia
+			&& Player.ateArtisanBread
+			&& Player.unlockedBiomeTorches
+			&& Player.unlockedSuperCart)
 			ModContent.GetInstance<ReRevitalized>().Grant();
 	}
 
@@ -377,7 +392,8 @@ public class BatchPlayer : ModPlayer
 	{
 		bool seated = Player.sitting.isSitting || Player.sleeping.isSleeping;
 		bool attacking = Player.itemAnimation > 0 && Player.HeldItem.damage > 0;
-		if (seated && !attacking && Main.musicBox2 >= 0)
+		// SceneMetrics.ActiveMusicBox is a placed, switched-on box near the player (Main.musicBox2 is the equipped one and never resets).
+		if (seated && !attacking && Main.SceneMetrics.ActiveMusicBox >= 0)
 			_melody++;
 		else
 			_melody = 0;
@@ -532,7 +548,7 @@ public class BatchNPC : GlobalNPC
 			Main.LocalPlayer.GetModPlayer<BatchPlayer>().ClearEmpress();
 		}
 
-		if (BatchLogic.IsPrimary(npc.type) && BatchLogic.GuardianChasing())
+		if (ThirdLogic.IsBossLike(npc) && ThirdLogic.IsFinal(npc) && BatchLogic.GuardianChasing())
 			ModContent.GetInstance<VeryBadTime>().Grant();
 
 		BatchLogic.NoteTownDead(npc);
@@ -581,9 +597,11 @@ public class BatchProjectile : GlobalProjectile
 			Main.LocalPlayer.GetModPlayer<BatchPlayer>().Fired = true;
 	}
 
-	public override void PostAI(Projectile projectile)
+	// The Clentaminator spray converts tiles inside its own AI, so the tiles have to be read before it runs.
+	public override bool PreAI(Projectile projectile)
 	{
 		BatchLogic.NoteSpray(projectile);
+		return true;
 	}
 
 	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
@@ -611,7 +629,8 @@ public class BatchProjectile : GlobalProjectile
 
 	private static bool IsBoulder(int type)
 	{
-		return type == ProjectileID.Boulder || type == ProjectileID.BouncyBoulder || type == ProjectileID.MiniBoulder;
+		return type == ProjectileID.Boulder || type == ProjectileID.BouncyBoulder || type == ProjectileID.MiniBoulder
+			|| type == ProjectileID.LifeCrystalBoulder || type == ProjectileID.MoonBoulder || type == ProjectileID.RollingCactus;
 	}
 }
 
@@ -656,7 +675,8 @@ public static class BatchLogic
 	{
 		ItemID.Swordfish, ItemID.PurpleClubberfish, ItemID.ReaverShark, ItemID.SawtoothShark,
 		ItemID.Rockfish, ItemID.ObsidianSwordfish, ItemID.Tsunami, ItemID.Flairon,
-		ItemID.BubbleGun, ItemID.RazorbladeTyphoon, ItemID.TempestStaff
+		ItemID.BubbleGun, ItemID.RazorbladeTyphoon, ItemID.TempestStaff,
+		ItemID.Toxikarp, ItemID.Bladetongue, ItemID.FrostDaggerfish
 	};
 	private static readonly HashSet<ushort> CrimsonTiles = new HashSet<ushort>
 	{
@@ -732,7 +752,7 @@ public static class BatchLogic
 			|| type == NPCID.BrainofCthulhu || type == NPCID.QueenBee || type == NPCID.SkeletronHead
 			|| type == NPCID.Deerclops || type == NPCID.WallofFlesh || type == NPCID.QueenSlimeBoss
 			|| type == NPCID.TheDestroyer || type == NPCID.Retinazer || type == NPCID.Spazmatism
-			|| type == NPCID.SkeletronPrime || type == NPCID.Plantera || type == NPCID.GolemHead
+			|| type == NPCID.SkeletronPrime || type == NPCID.Plantera || type == NPCID.Golem
 			|| type == NPCID.DukeFishron || type == NPCID.HallowBoss || type == NPCID.CultistBoss
 			|| type == NPCID.MoonLordCore || type == NPCID.DD2Betsy || type == NPCID.DD2OgreT2
 			|| type == NPCID.DD2OgreT3 || type == NPCID.BloodNautilus || type == NPCID.Pumpking
@@ -768,7 +788,7 @@ public static class BatchLogic
 			return Prime;
 		if (type == NPCID.Plantera || type == NPCID.PlanterasTentacle)
 			return Plantera;
-		if (type == NPCID.Golem || type == NPCID.GolemHead || type == NPCID.GolemFistLeft || type == NPCID.GolemFistRight)
+		if (type == NPCID.Golem || type == NPCID.GolemHead || type == NPCID.GolemHeadFree || type == NPCID.GolemFistLeft || type == NPCID.GolemFistRight)
 			return Golem;
 		if (type == NPCID.DukeFishron)
 			return Duke;
@@ -919,7 +939,8 @@ public static class BatchLogic
 
 	public static void OnBossKilled(NPC npc)
 	{
-		if (!IsPrimary(npc.type))
+		// Only the last living part ends the fight (the Golem body, the second Twin, the last Eater segment...).
+		if (!ThirdLogic.IsBossLike(npc) || !ThirdLogic.IsFinal(npc) || Family(npc.type) == 0)
 			return;
 
 		int family = Family(npc.type);
@@ -1117,8 +1138,8 @@ public static class BatchLogic
 		Add(loot, Golem, ItemID.GolemFist, ItemID.PossessedHatchet, ItemID.Stynger, ItemID.HeatRay, ItemID.StaffofEarth, ItemID.Picksaw);
 		Add(loot, Duke, ItemID.Flairon, ItemID.Tsunami, ItemID.BubbleGun, ItemID.RazorbladeTyphoon, ItemID.TempestStaff);
 		Add(loot, Empress, ItemID.FairyQueenMagicItem, ItemID.FairyQueenRangedItem, ItemID.RainbowWhip, ItemID.PiercingStarlight, ItemID.EmpressBlade);
-		Add(loot, Moon, ItemID.Meowmere, ItemID.Terrarian, ItemID.StarWrath, ItemID.SDMG, ItemID.LastPrism, ItemID.LunarFlareBook, ItemID.RainbowCrystalStaff, ItemID.MoonlordTurretStaff, ItemID.PortalGun);
-		Add(loot, Betsy, ItemID.DD2BetsyBow, ItemID.MonkStaffT3);
+		Add(loot, Moon, ItemID.Meowmere, ItemID.Terrarian, ItemID.StarWrath, ItemID.SDMG, ItemID.LastPrism, ItemID.LunarFlareBook, ItemID.RainbowCrystalStaff, ItemID.MoonlordTurretStaff, ItemID.DayBreak, ItemID.Celeb2);
+		Add(loot, Betsy, ItemID.DD2BetsyBow, ItemID.MonkStaffT3, ItemID.ApprenticeStaffT3, ItemID.DD2SquireBetsySword);
 		Add(loot, Ogre, ItemID.BookStaff, ItemID.DD2PhoenixBow, ItemID.DD2SquireDemonSword, ItemID.MonkStaffT1, ItemID.MonkStaffT2);
 		Add(loot, Dread, ItemID.SanguineStaff);
 		Add(loot, Pumpking, ItemID.TheHorsemansBlade, ItemID.BatScepter, ItemID.RavenStaff, ItemID.CandyCornRifle, ItemID.JackOLanternLauncher);

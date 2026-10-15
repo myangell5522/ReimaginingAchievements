@@ -7,6 +7,8 @@ UI: {
 	More: + {0} ещё
 	Requirements: Требования:
 	RequiresMod: Требуется мод: {0}
+	LockedDescription: Запечатано. Включите мод «{0}», чтобы открыть это достижение.
+	LockedCount: Запечатано: {0}
 }
 
 Biomes: {
@@ -32,7 +34,7 @@ Biomes: {
 Status: {
 	Debuffs: Дебаффы: {0}/{1}
 	Defense: Защита: {0}/{1}
-	Speed: Скорость: {0}/{1} миль/с
+	Speed: Скорость: {0}/{1} миль/ч
 	Lava: В лаве: {0}/{1} с
 	Traps: Урон ловушками: {0}/{1}
 	Bounces: Прыжки: {0}/{1}
@@ -52,15 +54,15 @@ Status: {
 }
 
 Conditions: {
-	Leaf: Кристальный лист
+	Leaf: "{$BuffName.LeafCrystal}"
 	SEED_drunk: Пьяный мир
-	SEED_bees: Not the bees
-	SEED_ftw: For the worthy
+	SEED_bees: Not the Bees
+	SEED_ftw: For the Worthy
 	SEED_anniversary: Celebrationmk10
-	SEED_dontstarve: The Constant
-	SEED_remix: Don't dig up
-	SEED_notraps: No traps
-	SEED_zenith: Zenith
+	SEED_dontstarve: Константа (The Constant)
+	SEED_remix: Не копай над собой (Don't dig up)
+	SEED_notraps: No Traps
+	SEED_zenith: Zenith (getfixedboi)
 }
 
 Live: {
@@ -74,17 +76,17 @@ Live: {
 Achievements: {
 	AchievementCopperMoonLord: {
 		FriendlyName: Зубочистка
-		Description: Одолейте Лунного лорда, держа медный клинок в руках на протяжении всей битвы и не используя миньонов и стражей.
+		Description: Одолейте Лунного лорда, держа в руках «{$ItemName.CopperShortsword}» на протяжении всей битвы и не используя миньонов и стражей.
 	}
 
 	AchievementEoCBiome: {
 		FriendlyName: Великое зрелище
-		Description: Приведите Глаз Ктулху в каждый биом поверхности за одну ночь (лес, океан, снега, пустыня, джунгли, кладбище, лес светящихся грибов, искажение, багрянец и освящение).
+		Description: Приведите Глаз Ктулху в каждый биом поверхности за одну ночь (лес, океан, снега, пустыня, джунгли, кладбище, лес светящихся грибов, Искажение, Багрянец и Освящение).
 	}
 
 	AchievementBeeStatue: {
 		FriendlyName: Статуевод
-		Description: Одолеть Королеву пчёл, чтобы последний удар по ней был нанесён призванным статуей врагом.
+		Description: Одолейте Королеву пчел так, чтобы последний удар по ней нанес враг, призванный статуей.
 	}
 
 	AchievementLunaticOrange: {
@@ -109,7 +111,7 @@ Achievements: {
 
 	AchievementSpeed: {
 		FriendlyName: Быстрее света
-		Description: Достичь горизонтальной скорости в 250 миль/с (403 км/с или 187,5 тайлов/с)
+		Description: Достигните горизонтальной скорости в 250 миль/ч (402 км/ч, или 187,5 тайла/с) без ездовых животных.
 	}
 
 	AchievementDutchman: {
@@ -124,12 +126,12 @@ Achievements: {
 
 	AchievementHighFive: {
 		FriendlyName: Дай пять!
-		Description: Атакуйте руку Скелетрона с помощью «Рукошлёпа».
+		Description: Ударьте руку Скелетрона предметом «{$ItemName.SlapHand}».
 	}
 
 	AchievementTeamWolf: {
 		FriendlyName: Волков боятся
-		Description: Убейте вампира в ближнем бою, находясь в волчьей форме от ожерелья Лилит.
+		Description: Убейте вампира в ближнем бою, находясь в волчьей форме от «{$ItemName.WolfMountItem}».
 	}
 
 	AchievementGolemTraps: {
@@ -144,22 +146,22 @@ Achievements: {
 
 	AchievementSlimeMount: {
 		FriendlyName: Вернуть престол
-		Description: Подпрыгните на Королеве слизней с помощью липкого седла более 50 раз за один бой.
+		Description: Подпрыгните на Королеве слизней верхом на слизне от «{$ItemName.SlimySaddle}» 50 раз за один бой.
 	}
 
 	AchievementThisIsFine: {
 		FriendlyName: This is Fine
-		Description: Сесть на стул и выпить чашку чая, находясь под действием дебаффа «{$BuffName.OnFire}», и «{$BuffName.Frostburn}» или «{$BuffName.CursedInferno}».
+		Description: Сядьте на стул и выпейте из «{$ItemName.Teacup}», находясь под действием дебаффа «{$BuffName.OnFire}», и «{$BuffName.Frostburn}» или «{$BuffName.CursedInferno}».
 	}
 
 	AchievementOverkill: {
 		FriendlyName: Абсолютная аннигиляция
-		Description: Уничтожьте синего слизня, нанеся ему 3 000 ед. однократного урона с помощью снайперской винтовки (2 000 в классическом режиме).
+		Description: Уничтожьте синего слизня, нанеся ему 3 000 ед. однократного урона из «{$ItemName.SniperRifle}» (2 000 в классическом режиме).
 	}
 
 	AchievementDebuffs: {
 		FriendlyName: Как мы до этого докатились?
-		Description: Попадите под влияние 15 ванильных дебаффов одновременно (за исключением связанных с голодом или имеющих синюю иконку), не используя красное зелье.
+		Description: Попадите под влияние 15 ванильных дебаффов одновременно (за исключением связанных с голодом или имеющих синюю иконку), не используя «{$ItemName.RedPotion}».
 	}
 
 	AchievementCutDown: {
@@ -169,12 +171,12 @@ Achievements: {
 
 	AchievementBiomes: {
 		FriendlyName: Турист
-		Description: Посетить все следующие биомы менее чем за 15 секунд: лес, космос, снега, пустыня, багрянец, искажение, джунгли, Темница, океан, биом светящихся грибов, освящение, преисподняя, мраморная и гранитная пещеры, храм джунглей и Эфир.
+		Description: Посетите все следующие биомы менее чем за 15 секунд: лес, космос, снега, пустыня, Багрянец, Искажение, джунгли, темница, океан, биом светящихся грибов, Освящение, преисподняя, мраморная и гранитная пещеры, храм джунглей и Эфир.
 	}
 
 	FloorIsLava: {
 		FriendlyName: Пол — это лава
-		Description: Одолейте Лунного Лорда, не касаясь твёрдой поверхности, земли, платформ и чего-либо ещё.
+		Description: Одолейте Лунного лорда, не касаясь твёрдой поверхности, земли, платформ и чего-либо ещё.
 	}
 
 	RememberItsBest: {
@@ -204,12 +206,12 @@ Achievements: {
 
 	ToasterPanic: {
 		FriendlyName: Паника тостера
-		Description: Одолейте XG-07 «Марс», усиленное восстановление величайшей машины Дрэйдона.
+		Description: Одолейте КзГ-07 Марс — усиленное восстановление величайшей машины Дрэйдона.
 	}
 
 	PerfectFlower: {
 		FriendlyName: Идеальный цветок идеального мира
-		Description: Завершите создание ГЕНЕЗИСА.
+		Description: Завершите создание Генезиса.
 	}
 
 	GoodAppleBite: {
@@ -219,12 +221,12 @@ Achievements: {
 
 	ParryNameless: {
 		FriendlyName: +PARRY
-		Description: Направьте распылитель пустоты на Безымянного бога.
+		Description: Направьте «Распылитель пустоты» на Безымянное божество.
 	}
 
 	WhatDidYouExpect: {
 		FriendlyName: А ты чего ждал?
-		Description: Позвольте Безымянному уничтожить ваш Жезл раздора. Это случается в мире GetFixedBoi.
+		Description: Позвольте Безымянному божеству уничтожить ваш «{$ItemName.RodOfHarmony}». Это происходит только в мире Zenith (getfixedboi).
 	}
 
 	SincerelyForYou: {
@@ -249,7 +251,7 @@ Achievements: {
 
 	LetMeFinish: {
 		FriendlyName: ДАЙ ДОГОВОРИТЬ!
-		Description: Одолейте Глаз Ктулху до второй фазы, пока глаз ещё не отвалился.
+		Description: Одолейте Глаз Ктулху ещё в первой фазе, до того как он раскроет пасть.
 	}
 
 	ItsHarder: {
@@ -259,17 +261,17 @@ Achievements: {
 
 	ItsHardest: {
 		FriendlyName: Сложнее некуда
-		Description: Одолейте Голема без надетых аксессуаров и без активных баффов.
+		Description: Одолейте Голема без надетых аксессуаров и без активных баффов (дебаффы не считаются).
 	}
 
 	WeakAreMighty: {
 		FriendlyName: Слабые сильны
-		Description: Одолейте босса с более чем 10 000 здоровья, нанеся весь урон только медным кинжалом.
+		Description: Одолейте босса с более чем 10 000 здоровья, нанеся весь урон только оружием «{$ItemName.CopperShortsword}».
 	}
 
 	AintACharity: {
 		FriendlyName: Это вам не благотворительность
-		Description: Дойдите до Стены плоти так, чтобы, кроме Гида, не появлялся ни один другой житель.
+		Description: Дойдите до Стены плоти так, чтобы, кроме Гида, не заселялся ни один другой житель (Старик, связанные жители и странствующие торговцы не считаются).
 	}
 
 	YouExist: {
@@ -309,7 +311,7 @@ Achievements: {
 
 	SupremeCalamitas: {
 		FriendlyName: Ведьмин час
-		Description: Одолейте Верховную ведьму, Каламитас.
+		Description: Одолейте Высшую ведьму, Каламитас.
 	}
 
 	DevourerOfGods: {
@@ -319,7 +321,7 @@ Achievements: {
 
 	YharonDragon: {
 		FriendlyName: Больше никаких возрождений
-		Description: Одолейте Ярона, дракона возрождения.
+		Description: Одолейте Ярона, Дракона возрождения.
 	}
 
 	ExoMechs: {
@@ -334,7 +336,7 @@ Achievements: {
 
 	NihilityTwins: {
 		FriendlyName: Ничто на двоих
-		Description: Одолейте Близнецов небытия.
+		Description: Одолейте Близнецов Пустоты.
 	}
 
 	TheCruiser: {
@@ -344,7 +346,7 @@ Achievements: {
 
 	Luminaris: {
 		FriendlyName: Мотылёк на огонь
-		Description: Одолейте Люминарис.
+		Description: Одолейте Галлюциногенную моль (Luminaris).
 	}
 
 	HighwayToHell: {
@@ -354,7 +356,7 @@ Achievements: {
 
 	LookAtMe: {
 		FriendlyName: Смотрите на меня!
-		Description: Поднимите агрессию врагов к себе до 1700+ при баффах «Битва» и «Водяная свеча».
+		Description: Поднимите агрессию врагов к себе до 1700+ при баффах «{$BuffName.Battle}» и «{$BuffName.WaterCandle}».
 	}
 
 	RideOfALifetime: {
@@ -369,12 +371,12 @@ Achievements: {
 
 	Been50Years: {
 		FriendlyName: Прошло 50 лет...
-		Description: Доберитесь до алтаря ящеров в мире «Ради достойных».
+		Description: Доберитесь до алтаря ящщеров в мире «For the Worthy».
 	}
 
 	NoFishyBusiness: {
 		FriendlyName: Никаких рыбных делишек
-		Description: Нанесите смертельный удар Герцогу Рыброну или Дреднаутилусу рыбным оружием.
+		Description: Нанесите смертельный удар Герцогу Рыброну или боссу «{$NPCName.BloodNautilus}» (Дреднаутилус) рыбным оружием.
 	}
 
 	SelfDefenseForDummies: {
@@ -389,12 +391,12 @@ Achievements: {
 
 	SheWouldNever: {
 		FriendlyName: Она бы никогда меня не ранила!
-		Description: Призван куб-компаньон, вокруг темно, и удар приходит со спины.
+		Description: Призван «{$ItemName.CompanionCube}», вокруг почти полная темнота, и удар приходит со спины.
 	}
 
 	OhhExtraShiny: {
 		FriendlyName: Ооо, ещё блестящее!
-		Description: Подберите семь больших самоцветов и Магилюминесценцию и хотя бы раз получите кристальный лист от полного комплекта хлорофитовой брони.
+		Description: Подберите семь больших самоцветов и «{$ItemName.Magiluminescence}» и хотя бы раз получите бафф «{$BuffName.LeafCrystal}» от полного комплекта хлорофитовой брони.
 	}
 
 	Relocation: {
@@ -414,17 +416,17 @@ Achievements: {
 
 	Unflappable: {
 		FriendlyName: Невозмутимый
-		Description: Иметь сразу 12 баффов без таймера. Питомцы, ездовые и миньоны не считаются.
+		Description: Получите сразу 12 баффов без таймера. Питомцы, ездовые и миньоны не считаются.
 	}
 
 	ReRevitalized: {
 		FriendlyName: Снова полон сил
-		Description: 500 здоровья, 200 маны, сердце демона и все постоянные улучшения персонажа.
+		Description: Достигните 500 здоровья и 200 маны, используйте «{$ItemName.DemonHeart}» и получите все постоянные улучшения персонажа, включая «{$ItemName.ArtisanLoaf}», «{$ItemName.TorchGodsFavor}» и «{$ItemName.MinecartPowerup}».
 	}
 
 	FitsOnTheWall: {
 		FriendlyName: Этому самое место на стене
-		Description: Соберите обычный трофей и реликвию Мастера для боссов прохождения: от Короля слизней до Лунного лорда, а также Королевы слизней, Герцога, Императрицы, Оленя и Бетси.
+		Description: Соберите обычный трофей и реликвию Мастера для боссов прохождения: от Короля слизней до Лунного лорда, а также Королевы слизней, Герцога Рыброна, Императрицы света, Циклоленя и Бетси.
 	}
 
 	RgbNoHitter: {
@@ -434,7 +436,7 @@ Achievements: {
 
 	VeryBadTime: {
 		FriendlyName: Очень плохое время
-		Description: Добить любого босса, пока Хранитель темницы жив и преследует вас.
+		Description: Добейте любого босса, пока Страж темницы жив и преследует вас.
 	}
 
 	Bowling: {
@@ -444,17 +446,17 @@ Achievements: {
 
 	WrongKindOfEvil: {
 		FriendlyName: Не то зло
-		Description: Клинамизатором превратите не меньше 200 блоков багрянца фиолетовым раствором или порчи красным за одну обработку.
+		Description: С помощью предмета «{$ItemName.Clentaminator}» превратите не меньше 200 блоков Багрянца раствором «{$ItemName.PurpleSolution}» или Искажения раствором «{$ItemName.RedSolution}» за одну обработку.
 	}
 
 	LovelyMelody: {
 		FriendlyName: Прекрасная мелодия
-		Description: 5 минут сидите на стуле или лежите в кровати у играющей музыкальной шкатулки, не атакуя и не вставая.
+		Description: 5 минут сидите на стуле или лежите в кровати рядом с включённой музыкальной шкатулкой, не атакуя и не вставая.
 	}
 
 	CantStarve: {
 		FriendlyName: Не могу голодать и не буду
-		Description: Весь урон по Оленю нанесён только предметами набора Don't Starve.
+		Description: Весь урон по Циклоленю нанесён только оружием из Don't Starve.
 	}
 
 	Scrooged: {
@@ -469,7 +471,7 @@ Achievements: {
 
 	PureInsanity: {
 		FriendlyName: Чистое безумие
-		Description: До хардмода очистите мир от порчи и багрянца до последнего блока, ни разу не используя растворы клинамизатора и святую воду.
+		Description: До хардмода очистите мир от Искажения и Багрянца до последнего блока, ни разу не используя растворы для «{$ItemName.Clentaminator}» и «{$ItemName.HolyWater}».
 	}
 
 	TisButAScratch: {
@@ -479,12 +481,12 @@ Achievements: {
 
 	BiggerFish: {
 		FriendlyName: Всегда найдётся рыба побольше
-		Description: Победите Герцога Рыброна, весь бой оставаясь в воде и без ездового Милого Рыброна.
+		Description: Победите Герцога Рыброна, весь бой оставаясь в воде и без «{$BuffName.CuteFishronMount}».
 	}
 
 	ImaFiringMahLazer: {
 		FriendlyName: Я ЗАРЯЖАЮ СВОЙ ЛАЗЕР
-		Description: Победите Лунного лорда, нанося весь урон Последней призмой.
+		Description: Победите Лунного лорда, нанося весь урон оружием «{$ItemName.LastPrism}».
 	}
 
 	SlimeSlayer: {
@@ -494,22 +496,22 @@ Achievements: {
 
 	LikeANinja: {
 		FriendlyName: Как ниндзя
-		Description: Победите босса, когда все надетые аксессуары окрашены Теневым красителем, а стена за вами покрашена Теневой краской.
+		Description: Победите босса, когда все надетые аксессуары окрашены красителем «{$ItemName.ShadowDye}», а стена за вами покрашена краской «{$ItemName.ShadowPaint}».
 	}
 
 	GetMeOuttaHere: {
 		FriendlyName: Вытащите меня отсюда!
-		Description: Окажитесь одновременно в паутине, окаменевшим и замороженным, вися на крюке.
+		Description: Получите дебаффы «{$BuffName.Webbed}», «{$BuffName.Stoned}» и «{$BuffName.Frozen}» одновременно, сразу после того как висели на крюке (паутина сама срывает крюк).
 	}
 
 	GoodRiddance: {
 		FriendlyName: Отличное избавление... Стоп, что?
-		Description: Пусть порча, багрянец и освящение вместе покроют 100% мира.
+		Description: Пусть Искажение, Багрянец и Освящение вместе покроют 100% мира.
 	}
 
 	MassacreByCat: {
 		FriendlyName: Кошачья резня
-		Description: Нанесите в сумме 2500 урона одним снарядом Мяумера.
+		Description: Нанесите в сумме 2500 урона одним снарядом «{$ItemName.Meowmere}».
 	}
 
 	MichaelBay: {
@@ -519,7 +521,7 @@ Achievements: {
 
 	Kaboom: {
 		FriendlyName: Бабах?
-		Description: Взорвите 10 и больше блоков взрывчатки в одно мгновение.
+		Description: Взорвите 10 и больше блоков «{$ItemName.Explosives}» в одно мгновение.
 	}
 
 	SteelFashioned: {
@@ -529,12 +531,12 @@ Achievements: {
 
 	LotOfRainbows: {
 		FriendlyName: ОЧЕНЬ много радуг
-		Description: Убейте радужного слизня только Радужной пушкой и Радужным жезлом, верхом на единороге, стоя на радужном кирпиче и с радужным красителем.
+		Description: Убейте радужного слизня только оружием «{$ItemName.RainbowGun}» и «{$ItemName.RainbowRod}», верхом на единороге, стоя на блоке «{$ItemName.RainbowBrick}» и с красителем «{$ItemName.RainbowDye}».
 	}
 
 	PrettySolidName: {
 		FriendlyName: Очень SOLID-ное имя
-		Description: Играйте персонажем по имени Big Boss или Snake в солнцезащитных очках.
+		Description: Играйте персонажем по имени Big Boss или Snake, надев «{$ItemName.Sunglasses}».
 	}
 
 	OutOfThinAir: {
@@ -544,7 +546,7 @@ Achievements: {
 
 	NoisyBunch: {
 		FriendlyName: Шумная компания
-		Description: За 2 игровых дня застаньте кровавую луну, армию гоблинов, слизневый дождь, пиратов, затмение, морозный легион, тыквенную и ледяную луны, марсиан и армию Древних.
+		Description: За 2 игровых дня застаньте кровавую луну, армию гоблинов, дождь слизней, нашествие пиратов, солнечное затмение, ледяной легион, тыквенную и морозную луны, марсианское безумие и армию Старца.
 	}
 
 	UnderControl: {
@@ -554,12 +556,12 @@ Achievements: {
 
 	AppleADay: {
 		FriendlyName: Яблоко в день
-		Description: Съешьте еду под отравлением или ядом.
+		Description: Съешьте еду под действием «{$BuffName.Poisoned}» или «{$BuffName.Venom}».
 	}
 
 	Traitor: {
 		FriendlyName: ПРЕДАТЕЛЬ!!!
-		Description: Пусть Королеву пчёл добьёт пчела, выпущенная не оружием (Медовые соты и подобное).
+		Description: Пусть Королеву пчёл добьёт пчела, выпущенная не оружием («{$ItemName.HoneyComb}» и подобное).
 	}
 
 	Meanie: {
@@ -579,7 +581,7 @@ Achievements: {
 
 	YareYareDaze: {
 		FriendlyName: Яре-яре дазе
-		Description: Победите пост-плантерного босса, нанеся весь урон Звёздным стражем.
+		Description: Победите пост-плантерного босса, нанеся весь урон призывом «{$BuffName.StardustGuardianMinion}».
 	}
 
 	FinestArt: {
@@ -589,7 +591,7 @@ Achievements: {
 
 	StopIt: {
 		FriendlyName: Хватит
-		Description: Попадите в одного и того же врага 50 тухлыми яйцами.
+		Description: Попадите в одного и того же врага 50 раз предметом «{$ItemName.RottenEgg}».
 	}
 
 	ThatsEmbarrassing: {
@@ -604,7 +606,7 @@ Achievements: {
 
 	LovesInTheAir: {
 		FriendlyName: Любовь витает в воздухе
-		Description: Влюбите любовными зельями Медсестру и Торговца оружием или Механика и Гоблина-изобретателя с разницей не больше 10 секунд.
+		Description: С помощью предмета «{$ItemName.LovePotion}» влюбите Медсестру и Оружейника или Механика и Гоблина-изобретателя с разницей не больше 10 секунд.
 	}
 
 	NahIdWin: {
@@ -619,12 +621,12 @@ Achievements: {
 
 	NyaNyaNya: {
 		FriendlyName: Ня ня ня
-		Description: Взмахните Мяумером, катаясь в мяумерной вагонетке.
+		Description: Взмахните оружием «{$ItemName.Meowmere}», катаясь на вагонетке «{$ItemName.MeowmereMinecart}».
 	}
 
 	Impostor: {
 		FriendlyName: Самозванец
-		Description: Используйте Пиратскую карту в полном матросском костюме.
+		Description: Используйте «{$ItemName.PirateMap}» в полном костюме моряка.
 	}
 
 	Broke: {
@@ -664,12 +666,12 @@ Achievements: {
 
 	FloridaMan: {
 		FriendlyName: Флоридский мужик
-		Description: Катайтесь на гольф-каре навеселе во время боя с боссом.
+		Description: Катайтесь на гольфкаре под баффом «{$BuffName.Tipsy}» во время боя с боссом.
 	}
 
 	Defecator: {
 		FriendlyName: Дефекатор
-		Description: Сядьте на унитаз с баффом «Изысканно сыт».
+		Description: Сядьте на унитаз с баффом «{$BuffName.WellFed3}».
 	}
 
 	ExtraCheese: {
@@ -714,7 +716,7 @@ Achievements: {
 
 	SeedCollector: {
 		FriendlyName: Коллекционер семян
-		Description: Побывайте в мирах всех секретных сидов.
+		Description: Побывайте в мирах всех секретных сидов. Мир Zenith засчитывается только как сам Zenith.
 	}
 
 	AbsoluteChaos: {
@@ -724,7 +726,7 @@ Achievements: {
 
 	TrueStormtrooper: {
 		FriendlyName: Настоящий штурмовик
-		Description: Потратьте 400 маны из Лазерного пулемёта за одну очередь, ни разу не попав.
+		Description: Потратьте 400 маны на «{$ItemName.LaserMachinegun}» за одну очередь, ни разу не попав.
 	}
 
 	GreatKhan: {
@@ -739,12 +741,12 @@ Achievements: {
 
 	NowStrike: {
 		FriendlyName: СЕЙЧАС!
-		Description: Попадите по врагу Громовым разрядником в течение 5 секунд после злой эмоции.
+		Description: Попадите по врагу оружием «{$ItemName.ThunderStaff}» в течение 5 секунд после злой эмоции.
 	}
 
 	BreakingBad: {
 		FriendlyName: Во все тяжкие
-		Description: Продайте 9000 кристальных осколков.
+		Description: Продайте 9000 шт. «{$ItemName.CrystalShard}».
 	}
 
 	PharaohsFate: {
@@ -764,7 +766,7 @@ Achievements: {
 
 	NoScope: {
 		FriendlyName: Без прицела
-		Description: Победите хардмодного босса только Снайперской винтовкой с мушкетными пулями.
+		Description: Победите хардмодного босса только из «{$ItemName.SniperRifle}» патронами «{$ItemName.MusketBall}».
 	}
 
 	RedWedding: {
@@ -774,12 +776,12 @@ Achievements: {
 
 	JustWhy: {
 		FriendlyName: Но зачем?
-		Description: Продайте Зенит и закройте лавку, не выкупив его.
+		Description: Продайте «{$ItemName.Zenith}» и закройте лавку, не выкупив его.
 	}
 
 	IfThatsWhatYouWant: {
 		FriendlyName: Ну, если тебе так хочется...
-		Description: Наденьте полный костюм горничной и хвост лисы, собаки, кролика или ящерицы.
+		Description: Наденьте полный костюм горничной («{$ItemName.MaidHead}», «{$ItemName.MaidShirt}», «{$ItemName.MaidPants}» или розовый вариант) и хвост лисы, собаки, кролика или ящерицы.
 	}
 
 	WaitThisIsntRight: {
@@ -799,7 +801,7 @@ Achievements: {
 
 	WhyNameless: {
 		FriendlyName: Зачем...?
-		Description: Победите Безымянного бога только оружием с префиксом «Сломанный» и без зелий баффов.
+		Description: Победите Безымянное божество только оружием с префиксом «Сломанный» и без зелий баффов.
 	}
 
 	Alchemist: {

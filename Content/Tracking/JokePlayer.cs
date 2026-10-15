@@ -9,12 +9,15 @@ namespace ReimaginingAchievements.Content.Tracking;
 public class JokePlayer : ModPlayer
 {
 	private const int RecallWindow = 120;
+	private const int RecallArmTime = 180;
 	private const int PlatinumCopper = 1000000;
 
 	public int NurseHeals;
 	public int CoinsToday;
 	public int DynamiteBought;
 	private int _recall;
+	private int _recallArmed;
+	private Vector2 _recallFrom;
 	private int _lastTax = -1;
 	private bool _wasDay;
 	private bool _falling;
@@ -25,6 +28,7 @@ public class JokePlayer : ModPlayer
 	{
 		_lastTax = -1;
 		_recall = 0;
+		_recallArmed = 0;
 		_falling = false;
 		_wasDay = Main.dayTime;
 		NurseHeals = 0;
@@ -46,6 +50,17 @@ public class JokePlayer : ModPlayer
 		_wasDay = Main.dayTime;
 		if (_recall > 0)
 			_recall--;
+
+		// The 2 second window starts at the actual teleport, not when the mirror animation begins.
+		if (_recallArmed > 0)
+		{
+			_recallArmed--;
+			if (Vector2.Distance(Player.Center, _recallFrom) > 50f * 16f)
+			{
+				_recallArmed = 0;
+				_recall = RecallWindow;
+			}
+		}
 
 		TrackTax();
 		TrackFall();
@@ -95,7 +110,8 @@ public class JokePlayer : ModPlayer
 
 	public void ArmRecall()
 	{
-		_recall = RecallWindow;
+		_recallArmed = RecallArmTime;
+		_recallFrom = Player.Center;
 	}
 
 	public void RegisterBullet()

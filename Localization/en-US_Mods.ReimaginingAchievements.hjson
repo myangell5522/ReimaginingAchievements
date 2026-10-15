@@ -7,6 +7,8 @@ UI: {
 	More: + {0} more
 	Requirements: Requirements:
 	RequiresMod: Requires the mod: {0}
+	LockedDescription: Sealed. Enable {0} to unlock this achievement.
+	LockedCount: "{0} sealed"
 }
 
 Biomes: {
@@ -52,15 +54,15 @@ Status: {
 }
 
 Conditions: {
-	Leaf: Crystal Leaf
-	SEED_drunk: Drunk world
-	SEED_bees: Not the bees
-	SEED_ftw: For the worthy
+	Leaf: "{$BuffName.LeafCrystal}"
+	SEED_drunk: Drunk world (05162020)
+	SEED_bees: Not the Bees
+	SEED_ftw: For the Worthy
 	SEED_anniversary: Celebrationmk10
 	SEED_dontstarve: The Constant
-	SEED_remix: Don't dig up
-	SEED_notraps: No traps
-	SEED_zenith: Zenith
+	SEED_remix: Don't Dig Up
+	SEED_notraps: No Traps
+	SEED_zenith: Zenith (getfixedboi)
 }
 
 Live: {
@@ -109,7 +111,7 @@ Achievements: {
 
 	AchievementSpeed: {
 		FriendlyName: Faster than Light
-		Description: Reach a horizontal velocity of 250 mph or higher without mounts.
+		Description: Reach a horizontal velocity of 250 mph (187.5 tiles per second) or higher without mounts.
 	}
 
 	AchievementDutchman: {
@@ -209,7 +211,7 @@ Achievements: {
 
 	PerfectFlower: {
 		FriendlyName: The Perfect Flower From a Perfect World
-		Description: Finish building the GENESIS.
+		Description: Finish building the Genesis.
 	}
 
 	GoodAppleBite: {
@@ -224,7 +226,7 @@ Achievements: {
 
 	WhatDidYouExpect: {
 		FriendlyName: What did you expect?
-		Description: Let the Nameless Deity destroy your Rod of Harmony. This happens in a GetFixedBoi world.
+		Description: Let the Nameless Deity destroy your Rod of Harmony. This only happens in a Zenith (getfixedboi) world.
 	}
 
 	SincerelyForYou: {
@@ -249,7 +251,7 @@ Achievements: {
 
 	LetMeFinish: {
 		FriendlyName: LET ME FINISH!
-		Description: Defeat the Eye of Cthulhu before its second phase, while the eye has not yet fallen off.
+		Description: Defeat the Eye of Cthulhu while it is still in its first phase, before it reveals its mouth.
 	}
 
 	ItsHarder: {
@@ -259,7 +261,7 @@ Achievements: {
 
 	ItsHardest: {
 		FriendlyName: It's Hardest
-		Description: Defeat the Golem with no accessories equipped and no buffs active.
+		Description: Defeat the Golem with no accessories equipped and no buffs active (debuffs don't count).
 	}
 
 	WeakAreMighty: {
@@ -269,7 +271,7 @@ Achievements: {
 
 	AintACharity: {
 		FriendlyName: It ain't a charity
-		Description: Reach the Wall of Flesh with no town NPC but the Guide having appeared.
+		Description: Reach the Wall of Flesh without any town NPC but the Guide ever moving in (the Old Man, bound NPCs and traveling merchants don't count).
 	}
 
 	YouExist: {
@@ -334,7 +336,7 @@ Achievements: {
 
 	NihilityTwins: {
 		FriendlyName: Nothing Shared
-		Description: Defeat the Nihility Twins.
+		Description: Defeat the Nihility Twin.
 	}
 
 	TheCruiser: {
@@ -369,7 +371,7 @@ Achievements: {
 
 	Been50Years: {
 		FriendlyName: It's Been 50 Years...
-		Description: Reach a Lihzahrd altar in a For The Worthy world.
+		Description: Reach a Lihzahrd Altar in a For the Worthy world.
 	}
 
 	NoFishyBusiness: {
@@ -394,7 +396,7 @@ Achievements: {
 
 	OhhExtraShiny: {
 		FriendlyName: Ohh, Extra Shiny!
-		Description: Pick up the seven large gems and Magiluminescence, and receive the Crystal Leaf from a full set of Chlorophyte armor.
+		Description: Pick up the seven large gems and Magiluminescence, and receive the Leaf Crystal buff from a full set of Chlorophyte armor.
 	}
 
 	Relocation: {
@@ -419,7 +421,7 @@ Achievements: {
 
 	ReRevitalized: {
 		FriendlyName: Re-revitalized
-		Description: Reach 500 health and 200 mana, use a Demon Heart, and obtain every permanent character upgrade.
+		Description: Reach 500 health and 200 mana, use a Demon Heart, and obtain every permanent character upgrade, including the Artisan Loaf, Torch God's Favor and the Minecart Upgrade Kit.
 	}
 
 	FitsOnTheWall: {
@@ -449,7 +451,7 @@ Achievements: {
 
 	LovelyMelody: {
 		FriendlyName: Lovely Melody
-		Description: Sit in a chair or lie in a bed beside a playing music box for 5 minutes without attacking or getting up.
+		Description: Sit in a chair or lie in a bed beside a switched-on music box for 5 minutes without attacking or getting up.
 	}
 
 	CantStarve: {
@@ -479,7 +481,7 @@ Achievements: {
 
 	BiggerFish: {
 		FriendlyName: There's Always a Bigger Fish
-		Description: Defeat Duke Fishron while staying in water the whole fight, without the Cute Fishron mount.
+		Description: Defeat Duke Fishron while staying in water the whole fight, without the Cute Fishron Mount.
 	}
 
 	ImaFiringMahLazer: {
@@ -499,7 +501,7 @@ Achievements: {
 
 	GetMeOuttaHere: {
 		FriendlyName: Get Me Outta Here!
-		Description: Be Webbed, Stoned and Frozen at once while hanging on a grappling hook.
+		Description: Be Webbed, Stoned and Frozen at once right after hanging on a grappling hook (the web tears the hook off by itself).
 	}
 
 	GoodRiddance: {
@@ -544,7 +546,7 @@ Achievements: {
 
 	NoisyBunch: {
 		FriendlyName: Noisy Bunch
-		Description: Within 2 in-game days, witness a Blood Moon, Goblin Army, Slime Rain, Pirate Invasion, Solar Eclipse, Frost Legion, Pumpkin Moon, Frost Moon, Martian Madness and the Old One's Army.
+		Description: Within 2 in-game days, witness a Blood Moon, a Goblin Army, Slime Rain, a Pirate Invasion, a Solar Eclipse, the Frost Legion, a Pumpkin Moon, a Frost Moon, Martian Madness and the Old One's Army.
 	}
 
 	UnderControl: {
@@ -554,7 +556,7 @@ Achievements: {
 
 	AppleADay: {
 		FriendlyName: An Apple a Day
-		Description: Eat food while Poisoned or Venomed.
+		Description: Eat food while Poisoned or under Acid Venom.
 	}
 
 	Traitor: {
@@ -664,7 +666,7 @@ Achievements: {
 
 	FloridaMan: {
 		FriendlyName: Florida Man
-		Description: Drive a golf cart while Tipsy during a boss fight.
+		Description: Drive a Golf Cart while Tipsy during a boss fight.
 	}
 
 	Defecator: {
@@ -714,7 +716,7 @@ Achievements: {
 
 	SeedCollector: {
 		FriendlyName: Seed Collector
-		Description: Visit a world of every secret seed.
+		Description: Visit a world of every secret seed. A Zenith world only counts as Zenith.
 	}
 
 	AbsoluteChaos: {
@@ -779,7 +781,7 @@ Achievements: {
 
 	IfThatsWhatYouWant: {
 		FriendlyName: If That's What You Want...
-		Description: Wear a full maid outfit together with a fox, dog, bunny or lizard tail.
+		Description: Wear a full maid outfit (Maid Bonnet, Maid Dress and Maid Shoes, or the pink set) together with a Fox, Dog, Bunny or Lizard Tail.
 	}
 
 	WaitThisIsntRight: {

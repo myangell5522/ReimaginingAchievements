@@ -241,6 +241,8 @@ public class ThirdPlayer : ModPlayer
 	private readonly HashSet<int> _combo = new HashSet<int>();
 	private int _dodges;
 	private int _shimmer;
+	private int _sinceHooked = 999;
+	private bool _prevBloodMoon;
 	private int _khanSide;
 	private bool _inTemple;
 	private bool _templeRun;
@@ -273,6 +275,8 @@ public class ThirdPlayer : ModPlayer
 		_combo.Clear();
 		_dodges = 0;
 		_shimmer = 0;
+		_sinceHooked = 999;
+		_prevBloodMoon = Main.bloodMoon;
 		_khanSide = 0;
 		_inTemple = false;
 		_templeRun = false;
@@ -281,10 +285,12 @@ public class ThirdPlayer : ModPlayer
 		_coins = -1;
 
 		SeedCollector seeds = ModContent.GetInstance<SeedCollector>();
+		// A Zenith world switches every other secret seed flag on as well, so it only counts as itself.
+		bool zenith = Main.zenithWorld;
 		bool[] flags =
 		{
-			Main.drunkWorld, Main.notTheBeesWorld, Main.getGoodWorld, Main.tenthAnniversaryWorld,
-			Main.dontStarveWorld, Main.remixWorld, Main.noTrapsWorld, Main.zenithWorld
+			Main.drunkWorld && !zenith, Main.notTheBeesWorld && !zenith, Main.getGoodWorld && !zenith, Main.tenthAnniversaryWorld && !zenith,
+			Main.dontStarveWorld && !zenith, Main.remixWorld && !zenith, Main.noTrapsWorld && !zenith, zenith
 		};
 		for (int i = 0; i < flags.Length; i++)
 		{
@@ -571,7 +577,13 @@ public class ThirdPlayer : ModPlayer
 
 	private void UpdateStates()
 	{
-		if (Player.HasBuff(BuffID.Webbed) && Player.HasBuff(BuffID.Stoned) && Player.HasBuff(BuffID.Frozen) && Player.grapCount > 0)
+		// Webbed rips every hook off on the frame it lands, so "hanging on a hook" means "was hooked a moment ago".
+		if (Player.grapCount > 0 || Player.grappling[0] >= 0)
+			_sinceHooked = 0;
+		else if (_sinceHooked < 999)
+			_sinceHooked++;
+
+		if (Player.HasBuff(BuffID.Webbed) && Player.HasBuff(BuffID.Stoned) && Player.HasBuff(BuffID.Frozen) && _sinceHooked <= 60)
 			ModContent.GetInstance<GetMeOuttaHere>().Grant();
 
 		if (Player.aggro <= -2000)
@@ -627,9 +639,12 @@ public class ThirdPlayer : ModPlayer
 
 	private void UpdateMancha()
 	{
+		bool started = Main.bloodMoon && !_prevBloodMoon;
+		_prevBloodMoon = Main.bloodMoon;
 		if (!ThirdLogic.MancheRunning)
 		{
-			if (Main.bloodMoon && Main.hardMode && !Main.dayTime && Main.time < 600)
+			// Starts when the Blood Moon rises, whether naturally or from a Bloody Tear.
+			if (started && Main.hardMode)
 			{
 				ThirdLogic.MancheRunning = true;
 				ThirdLogic.MancheHits = 0;

@@ -71,7 +71,7 @@ public class ChallengePlayer : ModPlayer
 		if (target.type == NPCID.SkeletronHand && item.type == ItemID.SlapHand)
 			ModContent.GetInstance<AchievementHighFive>().HighFiveCondition.Complete();
 
-		if (target.life - damageDone <= 0 && target.type == NPCID.Vampire && Player.mount.Type == MountID.Wolf)
+		if (target.life <= 0 && target.type == NPCID.Vampire && Player.mount.Type == MountID.Wolf)
 			ModContent.GetInstance<AchievementTeamWolf>().TeamWolfCondition.Complete();
 	}
 

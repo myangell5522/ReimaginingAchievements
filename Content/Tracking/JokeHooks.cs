@@ -53,7 +53,7 @@ public class JokeNPC : GlobalNPC
 
 	public void HandleLocalKill(NPC npc)
 	{
-		if (npc.type == NPCID.GolemHead && JokeGear.LocalIsBare())
+		if (npc.type == NPCID.Golem && JokeGear.LocalIsBare())
 			ModContent.GetInstance<ItsHardest>().Grant();
 
 		if (npc.boss && npc.lifeMax > 10000 && CopperHit && !Spoiled)
@@ -106,7 +106,10 @@ public class JokePlayerHits : ModPlayer
 		if (Player.whoAmI != Main.myPlayer)
 			return;
 
-		JokeNPC.NoteItemHit(target, false);
+		// Since 1.4 the Copper Shortsword deals its damage through a stab projectile, not the item itself.
+		bool shortsword = proj.type == ProjectileID.CopperShortswordStab
+			|| proj.GetGlobalProjectile<ThirdProjectile>().Item == ItemID.CopperShortsword && !proj.minion && !proj.sentry;
+		JokeNPC.NoteItemHit(target, shortsword);
 	}
 }
 
@@ -124,9 +127,11 @@ public static class JokeGear
 				return false;
 		}
 
+		// Debuffs are unavoidable during the fight (Golem sets you on fire), so only real buffs count.
 		for (int i = 0; i < player.buffTime.Length; i++)
 		{
-			if (player.buffTime[i] > 0)
+			int type = player.buffType[i];
+			if (type > 0 && player.buffTime[i] > 0 && !Main.debuff[type])
 				return false;
 		}
 
@@ -145,7 +150,8 @@ public class JokeItem : GlobalItem
 		ItemID.ShellphoneSpawn,
 		ItemID.ShellphoneOcean,
 		ItemID.ShellphoneHell,
-		ItemID.RecallPotion
+		ItemID.RecallPotion,
+		ItemID.PotionOfReturn
 	};
 
 	public override void OnSpawn(Item item, IEntitySource source)

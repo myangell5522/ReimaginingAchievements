@@ -62,7 +62,7 @@ public static class VanillaCatalog
 				continue;
 			}
 
-			if (item.type != type)
+			if (item.type != type || !Obtainable(type))
 				continue;
 
 			int kind = WeaponKind(item);
@@ -75,6 +75,16 @@ public static class VanillaCatalog
 			if (IsPotion(item))
 				PotionBuffs.Add(item.buffType);
 		}
+	}
+
+	/// <summary>Anything Journey Mode cannot research (developer leftovers, unobtainable items) is left out.</summary>
+	private static bool Obtainable(int type)
+	{
+		var catalog = Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance;
+		if (catalog.SacrificeCountNeededByItemId.Count == 0)
+			return true;
+
+		return catalog.TryGetSacrificeCountCapToUnlockInfiniteItems(type, out int needed) && needed > 0;
 	}
 
 	private static int WeaponKind(Item item)

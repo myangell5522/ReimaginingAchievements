@@ -192,15 +192,25 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 		_sourceList.OverflowHidden = true;
 		rail.Append(_sourceList);
 
-		var seen = new HashSet<string>();
+		var order = new List<string>();
+		var available = new HashSet<string>();
 		foreach (Achievement achievement in Main.Achievements.CreateAchievementsList())
 		{
 			string source = AchievementSources.Of(achievement);
-			if (!seen.Add(source))
-				continue;
+			if (!order.Contains(source))
+				order.Add(source);
 
+			if (!(achievement.ModAchievement is IModGated gated && gated.ModMissing))
+				available.Add(source);
+		}
+
+		foreach (string source in order)
+		{
 			string captured = source;
 			var button = new UITextPanel<string>(captured, 0.62f);
+			if (!available.Contains(source))
+				button.TextColor = new Color(140, 140, 156);
+
 			button.Width.Set(0f, 1f);
 			button.Height.Set(26f, 0f);
 			button.OnMouseOver += FadeIn;
@@ -365,14 +375,16 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 			rows.Add(achievement);
 		}
 
-		rows = rows.OrderBy(achievement => achievement.Id).ToList();
+		// Achievements of mods that are not loaded sink to the bottom and stay out of the progress bar.
+		rows = rows.OrderBy(LiveText.IsModLocked).ThenBy(achievement => achievement.Id).ToList();
 
 		_list.Clear();
 		foreach (Achievement achievement in rows)
 			_list.Add(new AchievementRow(achievement));
 
+		_progress.Locked = rows.Count(LiveText.IsModLocked);
 		_progress.Done = rows.Count(achievement => achievement.IsCompleted);
-		_progress.Total = rows.Count;
+		_progress.Total = rows.Count - _progress.Locked;
 		Recalculate();
 	}
 
@@ -576,6 +588,7 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 	{
 		public int Done;
 		public int Total;
+		public int Locked;
 
 		protected override void DrawSelf(SpriteBatch spriteBatch)
 		{
@@ -584,7 +597,17 @@ public class AchievementsMenuState : UIState, IHaveBackButtonCommand
 			var scale = new Vector2(0.85f);
 			ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, text, dimensions.Position(), Color.Gold, 0f, Vector2.Zero, scale);
 			float labelWidth = ChatManager.GetStringSize(FontAssets.ItemStack.Value, text, scale).X + 10f;
-			var bar = new Rectangle((int)(dimensions.X + labelWidth), (int)dimensions.Y + 3, (int)Math.Max(40f, dimensions.Width - labelWidth), 12);
+			float lockedWidth = 0f;
+			if (Locked > 0)
+			{
+				string locked = Language.GetTextValue("Mods.ReimaginingAchievements.UI.LockedCount", Locked);
+				Vector2 size = ChatManager.GetStringSize(FontAssets.ItemStack.Value, locked, scale);
+				lockedWidth = size.X + 12f;
+				Vector2 at = new Vector2(dimensions.X + dimensions.Width - size.X, dimensions.Y);
+				ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, locked, at, new Color(150, 150, 166), 0f, Vector2.Zero, scale);
+			}
+
+			var bar = new Rectangle((int)(dimensions.X + labelWidth), (int)dimensions.Y + 3, (int)Math.Max(40f, dimensions.Width - labelWidth - lockedWidth), 12);
 			Texture2D pixel = TextureAssets.MagicPixel.Value;
 			spriteBatch.Draw(pixel, bar, new Color(13, 20, 44));
 			float fill = Total <= 0 ? 0f : Done / (float)Total;

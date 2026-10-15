@@ -66,9 +66,11 @@ public class JokeWorld : ModSystem
 		LavaWatch.Clear();
 		if (!_loaded)
 		{
+			// Defaults for a world this mod has never saved. A world already in Hardmode
+			// cannot prove who moved in before the Wall of Flesh, so the charity run is off.
 			SawPreHardmode = !Main.hardMode;
 			AltarBroken = false;
-			CharitySpoiled = false;
+			CharitySpoiled = Main.hardMode;
 			SeenBosses.Clear();
 		}
 
@@ -88,19 +90,15 @@ public class JokeWorld : ModSystem
 
 	public override void PostUpdateNPCs()
 	{
-		if (!CharitySpoiled && !Main.hardMode)
+		if (!CharitySpoiled)
 		{
 			for (int i = 0; i < Main.maxNPCs; i++)
 			{
-				NPC npc = Main.npc[i];
-				if (!npc.active || !npc.townNPC || npc.type == NPCID.Guide)
-					continue;
-
-				if ((uint)npc.type < (uint)NPCID.Sets.IsTownPet.Length && NPCID.Sets.IsTownPet[npc.type])
-					continue;
-
-				CharitySpoiled = true;
-				break;
+				if (IsResident(Main.npc[i]))
+				{
+					CharitySpoiled = true;
+					break;
+				}
 			}
 		}
 
@@ -109,6 +107,22 @@ public class JokeWorld : ModSystem
 	public override void PostUpdateEverything()
 	{
 		CheckLava();
+	}
+
+	/// <summary>A town NPC that actually moved in. The Old Man, bound NPCs, visiting merchants and town pets are not residents.</summary>
+	private static bool IsResident(NPC npc)
+	{
+		if (!npc.active || !npc.townNPC || npc.type == NPCID.Guide)
+			return false;
+
+		if (npc.type == NPCID.OldMan || npc.type == NPCID.TravellingMerchant || npc.type == NPCID.SkeletonMerchant)
+			return false;
+
+		if ((uint)npc.type < (uint)NPCID.Sets.IsTownPet.Length && NPCID.Sets.IsTownPet[npc.type])
+			return false;
+
+		// Bound NPCs (and the Old Man) have no housing head icon.
+		return NPC.TypeToDefaultHeadIndex(npc.type) >= 0;
 	}
 
 	public static void NoteBossSpawn(int type)

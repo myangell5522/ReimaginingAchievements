@@ -149,9 +149,10 @@ public class ChallengeGlobalNPC : GlobalNPC
 			FlagCopperMoonLord = false;
 	}
 
+	// npc is the attacker, target is the one being hit.
 	public override void OnHitNPC(NPC npc, NPC target, NPC.HitInfo hit)
 	{
-		if (npc.life - target.damage <= 0 && target.SpawnedFromStatue && npc.type == NPCID.QueenBee)
+		if (target.type == NPCID.QueenBee && target.life <= 0 && npc.SpawnedFromStatue)
 			Award.Grant<AchievementBeeStatue>();
 	}
 

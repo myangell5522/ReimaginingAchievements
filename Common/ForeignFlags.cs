@@ -5,11 +5,27 @@ using Terraria.ModLoader;
 
 namespace ReimaginingAchievements.Common;
 
+/// <summary>
+/// Reads progress flags out of other mods without a hard dependency.
+/// Every lookup is cached, and any member that throws is remembered and never asked again.
+/// </summary>
 public static class ForeignFlags
 {
+	private const BindingFlags AnyStatic = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy;
+	private const BindingFlags AnyInstance = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy;
+
 	private static readonly Dictionary<string, object> Instances = new Dictionary<string, object>();
-	private static readonly Dictionary<string, Type> BossSystems = new Dictionary<string, Type>();
+	private static readonly Dictionary<string, Type> Types = new Dictionary<string, Type>();
+	private static readonly Dictionary<string, MemberInfo> Members = new Dictionary<string, MemberInfo>();
 	private static readonly HashSet<string> BrokenCalls = new HashSet<string>();
+
+	public static void Clear()
+	{
+		Instances.Clear();
+		Types.Clear();
+		Members.Clear();
+		BrokenCalls.Clear();
+	}
 
 	public static bool CallBool(string modName, string command, string argument)
 	{
@@ -19,7 +35,15 @@ public static class ForeignFlags
 
 		try
 		{
-			return mod.Call(command, argument) is bool value && value;
+			object result = mod.Call(command, argument);
+			if (result is bool value)
+				return value;
+
+			// Calamity answers an unknown name with an Exception object instead of throwing.
+			if (result is Exception)
+				BrokenCalls.Add(key);
+
+			return false;
 		}
 		catch (Exception)
 		{
@@ -36,53 +60,75 @@ public static class ForeignFlags
 		return item.Type;
 	}
 
-	public static bool StaticBool(string modName, string systemName, string member)
+	/// <summary>Reads a static bool. Fields and properties are both accepted
+	/// (Calamity keeps its downed flags as properties, Calamity Entropy as fields).</summary>
+	public static bool StaticBool(string modName, string typeName, string member)
 	{
-		return Read(modName, systemName, member, true) is bool value && value;
+		return Read(modName, typeName, member, true) is bool value && value;
 	}
 
-	public static bool InstanceBool(string modName, string systemName, string member)
+	public static bool InstanceBool(string modName, string typeName, string member)
 	{
-		return Read(modName, systemName, member, false) is bool value && value;
+		return Read(modName, typeName, member, false) is bool value && value;
 	}
 
-	public static int StaticInt(string modName, string systemName, string member)
+	public static int StaticInt(string modName, string typeName, string member)
 	{
-		return AsInt(Read(modName, systemName, member, true));
+		return AsInt(Read(modName, typeName, member, true));
 	}
 
-	public static int InstanceInt(string modName, string systemName, string member)
+	public static int InstanceInt(string modName, string typeName, string member)
 	{
-		return AsInt(Read(modName, systemName, member, false));
+		return AsInt(Read(modName, typeName, member, false));
 	}
 
-	public static bool Downed(string modName, string fieldName)
+	private static object Read(string modName, string typeName, string member, bool staticMember)
 	{
-		Type type = BossSystem(modName);
+		string key = modName + ":" + typeName + ":" + member + ":" + staticMember;
+		if (BrokenCalls.Contains(key))
+			return null;
+
+		object instance = null;
+		Type type;
+		if (staticMember)
+		{
+			type = FindModType(modName, typeName);
+		}
+		else
+		{
+			instance = Instance(modName, typeName);
+			type = instance?.GetType();
+		}
+
 		if (type == null)
-			return false;
-
-		FieldInfo field = type.GetField(fieldName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-		return field?.GetValue(null) is bool value && value;
-	}
-
-	private static object Read(string modName, string systemName, string member, bool staticMember)
-	{
-		object instance = Instance(modName, systemName);
-		if (instance == null)
 			return null;
 
-		BindingFlags flags = BindingFlags.Public | (staticMember ? BindingFlags.Static : BindingFlags.Instance);
-		PropertyInfo property = instance.GetType().GetProperty(member, flags);
-		if (property == null)
-			return null;
+		if (!Members.TryGetValue(key, out MemberInfo info))
+		{
+			BindingFlags flags = staticMember ? AnyStatic : AnyInstance;
+			info = (MemberInfo)type.GetProperty(member, flags) ?? type.GetField(member, flags);
+			Members[key] = info;
+		}
 
-		return property.GetValue(staticMember ? null : instance);
+		try
+		{
+			return info switch
+			{
+				PropertyInfo property => property.GetValue(staticMember ? null : instance),
+				FieldInfo field => field.GetValue(staticMember ? null : instance),
+				_ => null
+			};
+		}
+		catch (Exception)
+		{
+			BrokenCalls.Add(key);
+			return null;
+		}
 	}
 
-	private static object Instance(string modName, string systemName)
+	private static object Instance(string modName, string typeName)
 	{
-		string key = modName + ":" + systemName;
+		string key = modName + ":" + typeName;
 		if (Instances.TryGetValue(key, out object cached))
 			return cached;
 
@@ -91,7 +137,7 @@ public static class ForeignFlags
 		{
 			foreach (ModSystem system in mod.GetContent<ModSystem>())
 			{
-				if (system.Name == systemName)
+				if (system.Name == typeName)
 				{
 					found = system;
 					break;
@@ -99,80 +145,70 @@ public static class ForeignFlags
 			}
 
 			if (found == null)
-				found = LoadInstance(mod.Code, systemName);
+				found = LoadInstance(FindModType(modName, typeName));
 		}
 
 		Instances[key] = found;
 		return found;
 	}
 
-	private static object LoadInstance(Assembly assembly, string systemName)
+	private static object LoadInstance(Type type)
 	{
-		Type type = FindType(assembly, systemName);
-		if (type == null)
+		if (type == null || !typeof(ILoadable).IsAssignableFrom(type))
 			return null;
 
-		MethodInfo generic = null;
 		foreach (MethodInfo method in typeof(ModContent).GetMethods(BindingFlags.Public | BindingFlags.Static))
 		{
-			if (method.Name == "GetInstance" && method.IsGenericMethodDefinition && method.GetParameters().Length == 0)
+			if (method.Name != "GetInstance" || !method.IsGenericMethodDefinition || method.GetParameters().Length != 0)
+				continue;
+
+			try
 			{
-				generic = method;
-				break;
+				return method.MakeGenericMethod(type).Invoke(null, null);
+			}
+			catch (Exception)
+			{
+				return null;
 			}
 		}
 
-		if (generic == null)
-			return null;
-
-		try
-		{
-			return generic.MakeGenericMethod(type).Invoke(null, null);
-		}
-		catch (Exception)
-		{
-			return null;
-		}
+		return null;
 	}
 
-	private static Type BossSystem(string modName)
+	/// <summary>Finds a top-level type by simple name. Loadable content wins over helper classes that share
+	/// the name (WotG has an asset class called StargazingScene next to the real ModSystem).</summary>
+	private static Type FindModType(string modName, string simpleName)
 	{
-		if (BossSystems.TryGetValue(modName, out Type cached))
+		string key = modName + ":" + simpleName;
+		if (Types.TryGetValue(key, out Type cached))
 			return cached;
 
 		Type found = null;
-		if (ModLoader.TryGetMod(modName, out Mod mod))
-			found = FindType(mod.Code, "DownedBossSystem");
+		if (ModLoader.TryGetMod(modName, out Mod mod) && mod.Code != null)
+		{
+			Type[] types;
+			try
+			{
+				types = mod.Code.GetTypes();
+			}
+			catch (ReflectionTypeLoadException exception)
+			{
+				types = exception.Types;
+			}
 
-		BossSystems[modName] = found;
+			foreach (Type type in types ?? Array.Empty<Type>())
+			{
+				if (type == null || type.Name != simpleName || type.IsNested)
+					continue;
+
+				found = type;
+				if (typeof(ILoadable).IsAssignableFrom(type))
+					break;
+			}
+		}
+
+		Types[key] = found;
 		return found;
-	}
-
-	private static Type FindType(Assembly assembly, string simpleName)
-	{
-		if (assembly == null)
-			return null;
-
-		Type[] types;
-		try
-		{
-			types = assembly.GetTypes();
-		}
-		catch (ReflectionTypeLoadException exception)
-		{
-			types = exception.Types;
-		}
-
-		if (types == null)
-			return null;
-
-		foreach (Type type in types)
-		{
-			if (type != null && type.Name == simpleName)
-				return type;
-		}
-
-		return null;
 	}
 
 	private static int AsInt(object value)

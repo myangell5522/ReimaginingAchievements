@@ -40,8 +40,8 @@ public static class LiveText
 		if (achievement.Hidden && !achievement.IsCompleted)
 			return "???";
 
-		if (IsModLocked(achievement))
-			return "???";
+		if (IsModLocked(achievement) && achievement.ModAchievement is IModGated gated)
+			return Terraria.Localization.Language.GetTextValue("Mods.ReimaginingAchievements.UI.LockedDescription", gated.RequiredDisplayName);
 
 		if (achievement.ModAchievement is ILiveText live && !string.IsNullOrEmpty(live.LiveDescription))
 			return live.LiveDescription;
